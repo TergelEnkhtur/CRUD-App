@@ -13,7 +13,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // form-urlencoded
 
+// Database
+const Pool = require('pg').Pool
 
+var connectionParams = null;
+if (process.env.DATABASE_URL != null) {
+    connectionParams = {
+	connectionString: process.env.DATABASE_URL,
+	ssl: { rejectUnauthorized: false}
+    }
+} else {
+    connectionParams = {
+	user: 'api_user',
+	host: 'localhost',
+	database: 'api',
+	password: 'password',
+	port: 5432
+    }
+}
+console.log(connectionParams)
+const pool = new Pool(connectionParams)
+
+/*
 // Database
 const Pool = require('pg').Pool
 
@@ -34,6 +55,7 @@ const pool = new Pool({
     password: 'password',
     port: 5432
 })
+*/
 
 app.get('/', (req, res) => {
     
