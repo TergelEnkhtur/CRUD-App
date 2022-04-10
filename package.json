@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "start": "node index.js",
-      "local": "nodemon index.js",
+    "start": "node index.js",
+    "local": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,10 @@
   },
   "homepage": "https://github.com/TergelEnkhtur/csc-394-assignment-1-1#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "jade": "^1.11.0",
+    "pg": "^8.7.3",
+    "save": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

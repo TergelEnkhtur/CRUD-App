@@ -1,0 +1,21 @@
+doctype html
+
+html
+    head
+    title Team #{teamNumber}
+body
+    h1 Database Version
+    p #{databaseVersion}
+
+    h2 Team Members
+
+    table
+        thead
+            tr
+                td First Name
+                td Last Name
+        tbody
+            each teamMember in teamMembers
+                tr
+                    td #{teamMember.last_name}
+                    td #{teamMember.first_name}
