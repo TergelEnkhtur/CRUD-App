@@ -3,6 +3,8 @@ const app = express()
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000
 
+const path = require('path');
+
 // Set the view engine for the express app
 app.set("view engine", "jade")
 
@@ -66,16 +68,20 @@ app.get('/', (req, res) => {
 	
 	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
 	    console.log(err, team_members_results)
-	    
+
+//	pool.query('SELECT * FROM crud_library', (err, team_members_results) => {              //             console.log(err, team_members_results)
+													    
 	    res.render('index', {
 		teamNumber: 1,
 		databaseVersion: version_results.rows[0].version,
 		teamMembers: team_members_results.rows
 	    })
 	    
+	    
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
     })
+    res.sendFile(path.join(__dirname, '/index.html'));
 })
 /*
 app.get('/', (req, res) => {
