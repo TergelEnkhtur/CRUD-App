@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 28649;
+const port = process.env.PORT || 3000;
 
 // now updated with sendFile
 app.get('/', function(req, res) {
