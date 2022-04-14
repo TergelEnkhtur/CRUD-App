@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // form-urlencoded
 
-app.use(express.static('public'))
+app.use(express.static(__dirname + "public"))
 
 // Database
 const Pool = require('pg').Pool
