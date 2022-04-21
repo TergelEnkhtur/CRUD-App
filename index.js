@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
     })
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, '/views/index.jade'));
 })
 /*
 app.get('/', (req, res) => {
