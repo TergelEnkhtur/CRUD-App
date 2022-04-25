@@ -86,6 +86,10 @@ app.get('/', (req, res) => {
     })
     res.sendFile(path.join(__dirname, '/views/index.jade'));
 })
+
+app.get('/register', function(req, res){
+  res.render('register.jade', { title: 'Sign up here' });
+});
 /*
 app.get('/', (req, res) => {
     //console.log(req.method)
