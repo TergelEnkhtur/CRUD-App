@@ -39,28 +39,6 @@ if (process.env.DATABASE_URL != null) {
 console.log(connectionParams)
 const pool = new Pool(connectionParams)
 
-/*
-// Database
-const Pool = require('pg').Pool
-
-
-const connectionParams = process.env.DATABASE_URL || {
-
-    user: 'api_user',
-    host: 'localhost',
-    database: 'api',
-    password: 'password',
-    port: 5432
-}
-
-const pool = new Pool({
-    user: 'api_user',
-    host: process.env.DATABASE_URL || 'localhost',
-    database: 'api',
-    password: 'password',
-    port: 5432
-})
-*/
 
 app.get('/', (req, res) => {
     
@@ -88,8 +66,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/register', function(req, res){
+    
+
   res.render('register.jade', { title: 'Sign up here' });
+  
 });
+
+app.get('/login', function(req, res){
+    res.render('login.jade', { title: 'login  here' });
+  });
+
 /*
 app.get('/', (req, res) => {
     //console.log(req.method)
