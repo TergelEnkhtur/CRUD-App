@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
 
 //	pool.query('SELECT * FROM crud_library', (err, team_members_results) => {              //             console.log(err, team_members_results)
 													    
-	    res.render('bookTable', {
+	    res.render('index', {
 		teamNumber: 1,
 		databaseVersion: version_results.rows[0].version,
 		teamMembers: team_members_results.rows
