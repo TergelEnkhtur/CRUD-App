@@ -90,6 +90,11 @@ app.get('/', (req, res) => {
 app.get('/register', function(req, res){
   res.render('register.jade', { title: 'Sign up here' });
 });
+
+app.get('/login', function(req, res){
+    res.render('login.jade', { title: 'Log in here'});
+});
+
 /*
 app.get('/', (req, res) => {
     //console.log(req.method)
