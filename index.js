@@ -66,7 +66,22 @@ app.get('/', (req, res) => {
 });
 
 app.get('/register', function(req, res){
+    console.log('Accept: ' + req.get('Accept'))
     
+    pool.query('SELECT VERSION()', (err, version_results) => {
+	console.log(err, version_results.rows)
+	
+	pool.query('SELECT * FROM user_l', (err, user_l_results) => {
+	    console.log(err, team_members_results)
+													    
+	    res.render('register', {
+		teamNumber: 1,
+		databaseVersion: version_results.rows[0].version,
+		user_l: user_l_results.rows
+	    })
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	})
+    })
 
   res.render('register.jade', { title: 'Sign up here' });
   
