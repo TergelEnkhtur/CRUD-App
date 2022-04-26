@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
 
 //	pool.query('SELECT * FROM crud_library', (err, team_members_results) => {              //             console.log(err, team_members_results)
 													    
-	    res.render('bookTable', {
+	    res.render('index', {
 		teamNumber: 1,
 		databaseVersion: version_results.rows[0].version,
 		teamMembers: team_members_results.rows
@@ -84,17 +84,12 @@ app.get('/', (req, res) => {
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
     })
-    // res.sendFile(path.join(__dirname, '/views/index.jade'));
+    res.sendFile(path.join(__dirname, '/views/bookTable.jade'));
 })
 
 app.get('/register', function(req, res){
   res.render('register.jade', { title: 'Sign up here' });
 });
-
-app.get('/login', function(req, res){
-    res.render('login.jade', { title: 'Log in here'});
-});
-
 /*
 app.get('/', (req, res) => {
     //console.log(req.method)
