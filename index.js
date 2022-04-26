@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // form-urlencoded
 
-app.use(express.static(__dirname + "/public"))
+app.use(express.static(__dirname + "/views"))
 
 // Database
 const Pool = require('pg').Pool
@@ -84,8 +84,8 @@ app.get('/', (req, res) => {
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
     })
-    res.sendFile(path.join(__dirname, '/views/index.jade'));
-})
+    res.render('index.jade', { title: 'home page' });
+});
 
 app.get('/register', function(req, res){
   res.render('register.jade', { title: 'Sign up here' });
