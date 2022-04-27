@@ -93,13 +93,13 @@ app.get('/login', function(req, res){
     res.render('login.jade', { title: 'login  here' });
   });
 
-app.get('/bookTable', function(req, res){
+app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
 	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
 	    console.log(err, team_members_results)
 
-	    res.render('bookTable', {
+	    res.render('booktable', {
 		teamNumber: 1,
 		//databaseVersion: version_results.rows[0].version,
 		teamMembers: team_members_results.rows
@@ -107,7 +107,7 @@ app.get('/bookTable', function(req, res){
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
 })
-	res.render('bookTable.jade', { title: 'Book details' });
+	res.render('booktable.jade', { title: 'Book details' });
   });
 
 app.post('/', (req, res) => {
