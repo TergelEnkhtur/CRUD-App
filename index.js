@@ -45,17 +45,19 @@ app.get('/', (req, res) => {
     console.log('Accept: ' + req.get('Accept'))
     
     pool.query('SELECT VERSION()', (err, version_results) => {
-	console.log(err, version_results.rows)
+	console.log(err, version_results)
 	
-	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
-	    console.log(err, team_members_results)
+//	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
+//	    console.log(err, team_members_results)
 
-//	pool.query('SELECT * FROM crud_library', (err, team_members_results) => {              //             console.log(err, team_members_results)
+pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {            
+	            console.log(err, crud_library_results)
 													    
+
 	    res.render('index', {
 		teamNumber: 1,
-		databaseVersion: version_results.rows[0].version,
-		teamMembers: team_members_results.rows
+	//	databaseVersion: version_results.rows[0].version,
+		teamMembers: crud_library_results
 	    })
 	    
 	    
@@ -68,20 +70,20 @@ app.get('/', (req, res) => {
 app.get('/register', function(req, res){
     console.log('Accept: ' + req.get('Accept'))
     
-    pool.query('SELECT VERSION()', (err, version_results) => {
-	console.log(err, version_results.rows)
+   // pool.query('SELECT VERSION()', (err, version_results) => {
+//	console.log(err, version_results.rows)
 	
 	pool.query('SELECT * FROM user_l', (err, user_l_results) => {
-	    console.log(err, team_members_results)
+	    console.log(err, user_l_results)
 													    
-	    res.render('register', {
-		teamNumber: 1,
-		databaseVersion: version_results.rows[0].version,
-		user_l: user_l_results.rows
-	    })
+	    res.render('register'
+	//	teamNumber: 1,
+	//	databaseVersion: version_results.rows[0].version,
+	//	user_l: user_l_results.rows
+	    )
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
-    })
+  //  })
 
   res.render('register.jade', { title: 'Sign up here' });
   
@@ -91,21 +93,22 @@ app.get('/login', function(req, res){
     res.render('login.jade', { title: 'login  here' });
   });
 
-/*
-app.get('/', (req, res) => {
-    //console.log(req.method)
-    console.log('Accept: ' + req.get('Accept'))
-
-    pool.query('SELECT VERSION()', (err, result) => {
-	console.log(err, result.rows)
+app.get('/bookTable', function(req, res){
+	console.log('Accept: ' + req.get('Accept'))
 	
-	//res.send('<h1>Hello World!</h1>')
-	res.send(`<h1>DB Version: ${result.rows[0].version} </h1>`)
+	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
+	    console.log(err, team_members_results)
 
-	console.log('Content-Type: ' + res.get('Content-Type'))
-    })
+	    res.render('bookTable', {
+		teamNumber: 1,
+		//databaseVersion: version_results.rows[0].version,
+		teamMembers: team_members_results.rows
+	    })
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	
 })
-*/
+	res.render('bookTable.jade', { title: 'Book details' });
+  });
 
 app.post('/', (req, res) => {
 
@@ -117,6 +120,26 @@ app.post('/', (req, res) => {
     })
 })
 
+app.post('/register', (req, res) => {
+
+    pool.query(`INSERT INTO user_l (username, password) VALUES ('${req.body.username}', '${req.body.password}')`, (err, results) => {
+
+    console.log(err, results)
+    
+    res.redirect('/')
+    })
+})
+
+app.post('/bookTable', (req, res) => {
+
+	  pool.query(`INSERT INTO team_members (first_name, last_name) VALUES ('${req.body.first_name}', '${req.body.last_name}')`, (err, results) => {
+  
+	  console.log(err, results)
+	  
+	  res.redirect('/')
+	  })
+  })
+  
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
