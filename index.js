@@ -30,9 +30,13 @@ if (process.env.DATABASE_URL != null) {
 } else {
     connectionParams = {
 	user: 'api_user',
+	// user: 'vsfyqnuvlawoyi',
 	host: 'localhost',
+	// host: 'ec2-3-230-122-20.compute-1.amazonaws.com',
 	database: 'api',
+	// database: 'dc45bp0qq7uijc',
 	password: 'password',
+	// password: 'fc607e89fbf9b0d2132b66d388c8bb7b662e83897a28f0e05532760e95539743',
 	port: 5432
     }
 }
@@ -50,14 +54,14 @@ app.get('/', (req, res) => {
 //	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
 //	    console.log(err, team_members_results)
 
-pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {            
-	            console.log(err, crud_library_results)
+pool.query('SELECT * FROM team_members', (err, team_members_results) => {            
+	            console.log(err, team_members_results)
 													    
 
 	    res.render('index', {
 		teamNumber: 1,
 	//	databaseVersion: version_results.rows[0].version,
-		teamMembers: crud_library_results
+		teamMembers: team_members_results
 	    })
 	    
 	    
@@ -96,13 +100,13 @@ app.get('/login', function(req, res){
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
-	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
-	    console.log(err, crud_library_results)
+	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
+	    console.log(err, team_members_results)
 
 	    res.render('booktable', {
 		teamNumber: 1,
 		//databaseVersion: version_results.rows[0].version,
-		teamMembers: crud_library_results.rows
+		teamMembers: team_members_results.rows
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	

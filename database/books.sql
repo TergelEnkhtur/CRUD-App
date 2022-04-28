@@ -8,7 +8,6 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'WIN1252';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
@@ -59,7 +58,7 @@ CREATE SEQUENCE public.team_members_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.team_members_id_seq OWNER TO api_user;
+
 
 --
 -- Name: team_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
