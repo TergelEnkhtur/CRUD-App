@@ -50,14 +50,13 @@ app.get('/', (req, res) => {
 //	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
 //	    console.log(err, team_members_results)
 
-pool.query('SELECT * FROM team_members', (err, team_members_results) => {            
-	            console.log(err, team_members_results)
+pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {            
+	            console.log(err, crud_library_results)
 													    
 
 	    res.render('index', {
-		teamNumber: 1,
 	//	databaseVersion: version_results.rows[0].version,
-		teamMembers: team_members_results
+		crudLibraryMembers: crud_library_results
 	    })
 	    
 	    
@@ -73,8 +72,8 @@ app.get('/register', function(req, res){
    // pool.query('SELECT VERSION()', (err, version_results) => {
 //	console.log(err, version_results.rows)
 	
-	pool.query('SELECT * FROM user_l', (err, user_l_results) => {
-	    console.log(err, user_l_results)
+	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
+	    console.log(err, crud_user_results)
 													    
 	    res.render('register'
 	//	teamNumber: 1,
@@ -96,13 +95,13 @@ app.get('/login', function(req, res){
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
-	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
-	    console.log(err, team_members_results)
+	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
+	    console.log(err, crud_library_results)
 
 	    res.render('booktable', {
-		teamNumber: 1,
+		crudLibraryNumber: 1,
 		//databaseVersion: version_results.rows[0].version,
-		teamMembers: team_members_results.rows
+		crudLibraryMembers: crud_library_results.rows
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
@@ -112,7 +111,7 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO team_members (first_name, last_name) VALUES ('${req.body.first_name}', '${req.body.last_name}')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (isbn, book_name, author_name) VALUES ('${req.body.isbn}', '${req.body.book_name}', '${req.body.author_name}')`, (err, result) => {
 
 	console.log(err, result)
 	
@@ -122,7 +121,7 @@ app.post('/', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    pool.query(`INSERT INTO user_l (username, password) VALUES ('${req.body.username}', '${req.body.password}')`, (err, results) => {
+    pool.query(`INSERT INTO crud_user (username, password, userrole) VALUES ('${req.body.username}', '${req.body.password}', '${req.body.userrole}')`, (err, results) => {
 
     console.log(err, results)
     
@@ -132,7 +131,7 @@ app.post('/register', (req, res) => {
 
 app.post('/bookTable', (req, res) => {
 
-	  pool.query(`INSERT INTO team_members (first_name, last_name) VALUES ('${req.body.first_name}', '${req.body.last_name}')`, (err, results) => {
+	  pool.query(`INSERT INTO crud_library (isbn, book_name, author_name) VALUES ('${req.body.isbn}', '${req.body.book_name}', '${req.body.author_name}')`, (err, results) => {
   
 	  console.log(err, results)
 	  

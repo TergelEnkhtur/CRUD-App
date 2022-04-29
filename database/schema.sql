@@ -38,10 +38,9 @@ ALTER TABLE public.crud_library OWNER TO api_user;
 --
 
 CREATE TABLE public.crud_user (
-    userid character(6) NOT NULL,
     username character varying(25) NOT NULL,
     password character varying(25) NOT NULL,
-    userrole character varying(25) NOT NULL
+    userrole character varying(10) NOT NULL
 );
 
 
@@ -61,9 +60,7 @@ COPY public.crud_library (isbn, book_name, author_name) FROM stdin;
 -- Data for Name: crud_user; Type: TABLE DATA; Schema: public; Owner: api_user
 --
 
-COPY public.crud_user (userid, username, password, userrole) FROM stdin;
-002555	Tergel	5558	admin
-002556	Enkhtur	5558	admin
+COPY public.crud_user (username, password, userrole) FROM stdin;
 \.
 
 
@@ -80,7 +77,7 @@ ALTER TABLE ONLY public.crud_library
 --
 
 ALTER TABLE ONLY public.crud_user
-    ADD CONSTRAINT crud_user_pkey PRIMARY KEY (userid);
+    ADD CONSTRAINT crud_user_pkey PRIMARY KEY (username);
 
 
 --

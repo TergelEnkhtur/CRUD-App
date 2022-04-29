@@ -1,4 +1,5 @@
 doctype html
+
 html(lang='en')
   head
     // Required meta tags
@@ -17,13 +18,13 @@ html(lang='en')
         form(action='/register' method='post' name='registerForm')
           .form-group
             label(for='usernameInput') Username: 
-            input#usernameInput.form-control.mb-2(type='text' placeholder='Enter username')
+            input#usernameInput.form-control.mb-2(type='text' placeholder='Enter username', name="username")
           .form-group
             label(for='passwordInput') Password: 
-            input#passwordInput.form-control.mb-2(type='password' placeholder='Enter password')
+            input#passwordInput.form-control.mb-2(type='password' placeholder='Enter password', name="password")
           .form-group
             label(for='passwordInputRepeat') Re-Enter Password: 
-            input#passwordInputRepeat.form-control.mb-3(type='password' placeholder='Re-enter password')
+            input#passwordInputRepeat.form-control.mb-3(type='password' placeholder='Re-enter password', name="userrole")
           .container.text-center
             button.btn.btn-primary(type='submit') Submit
             a.btn.btn-secondary(href='/') Return to the Home Page
