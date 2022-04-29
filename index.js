@@ -30,13 +30,9 @@ if (process.env.DATABASE_URL != null) {
 } else {
     connectionParams = {
 	user: 'api_user',
-	// user: 'vsfyqnuvlawoyi',
 	host: 'localhost',
-	// host: 'ec2-3-230-122-20.compute-1.amazonaws.com',
 	database: 'api',
-	// database: 'dc45bp0qq7uijc',
 	password: 'password',
-	// password: 'fc607e89fbf9b0d2132b66d388c8bb7b662e83897a28f0e05532760e95539743',
 	port: 5432
     }
 }
