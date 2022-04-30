@@ -99,8 +99,7 @@ app.get('/booktable', function(req, res){
 	    console.log(err, crud_library_results)
 
 	    res.render('booktable', {
-		crudLibraryNumber: 1,
-		//databaseVersion: version_results.rows[0].version,
+		// databaseVersion: version_results.rows[0].version,
 		crudLibraryMembers: crud_library_results.rows
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
@@ -111,7 +110,7 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO crud_library (isbn, book_name, author_name) VALUES ('${req.body.isbn}', '${req.body.book_name}', '${req.body.author_name}')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (book_title, author_name, isbn) VALUES ('${req.body.book_title}', '${req.body.author_name}' '${req.body.isbn}')`, (err, result) => {
 
 	console.log(err, result)
 	
@@ -121,7 +120,7 @@ app.post('/', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    pool.query(`INSERT INTO crud_user (username, password, userrole) VALUES ('${req.body.username}', '${req.body.password}', '${req.body.userrole}')`, (err, results) => {
+    pool.query(`INSERT INTO crud_user (username, password, repassword, userrole) VALUES ('${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'admin')`, (err, results) => {
 
     console.log(err, results)
     
@@ -131,7 +130,7 @@ app.post('/register', (req, res) => {
 
 app.post('/bookTable', (req, res) => {
 
-	  pool.query(`INSERT INTO crud_library (isbn, book_name, author_name) VALUES ('${req.body.isbn}', '${req.body.book_name}', '${req.body.author_name}')`, (err, results) => {
+	  pool.query(`INSERT INTO crud_library (book_title, author_name, isbn) VALUES ('${req.body.book_title}', '${req.body.author_name}' '${req.body.isbn}')`, (err, results) => {
   
 	  console.log(err, results)
 	  

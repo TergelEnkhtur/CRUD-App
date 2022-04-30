@@ -76,11 +76,15 @@ html(lang='en')
             th(scope='col') Books Available
             th(scope='col') Edit/Delete
         tbody
+          //each crudLibraryMember in crudLibraryMembers
           tr
             td#row1(scope='row') 1
+            //td #{crudLibraryMember.book_name}
             td Hello World!
-            td John Doe
+            //td #{crudLibraryMember.author_name}
+            td John Deer
             td Fiction
+            //td #{crudLibraryMember.isbn}
             td 978-3-16-148410-0
             td 5
             td
