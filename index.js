@@ -39,26 +39,22 @@ if (process.env.DATABASE_URL != null) {
 console.log(connectionParams)
 const pool = new Pool(connectionParams)
 
+// All Main App Controls
 
+// App Get Controls
 app.get('/', (req, res) => {
     
     console.log('Accept: ' + req.get('Accept'))
     
     pool.query('SELECT VERSION()', (err, version_results) => {
 	console.log(err, version_results)
-	
-//	pool.query('SELECT * FROM team_members', (err, team_members_results) => {
-//	    console.log(err, team_members_results)
 
 pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {            
 	            console.log(err, crud_library_results)
 													    
-
 	    res.render('index', {
-	//	databaseVersion: version_results.rows[0].version,
 		crudLibraryMembers: crud_library_results
 	    })
-	    
 	    
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
@@ -66,12 +62,10 @@ pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
     res.render('index.jade', { title: 'home page' });
 });
 
+// App Get - - Register Page
 app.get('/register', function(req, res){
     console.log('Accept: ' + req.get('Accept'))
-    
-   // pool.query('SELECT VERSION()', (err, version_results) => {
-//	console.log(err, version_results.rows)
-	
+    	
 	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
 	    console.log(err, crud_user_results)
 													    
@@ -82,16 +76,18 @@ app.get('/register', function(req, res){
 	    )
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
-  //  })
-
   res.render('register.jade', { title: 'Sign up here' });
   
 });
 
+// App Get - - Login Page
 app.get('/login', function(req, res){
-    res.render('login.jade', { title: 'login  here' });
-  });
 
+    res.render('login.jade', { title: 'login  here' });
+	
+});
+
+// App Get - - Booktable Page
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
@@ -106,7 +102,7 @@ app.get('/booktable', function(req, res){
 	
 })
 	res.render('booktable.jade', { title: 'Book details' });
-  });
+});
 
 app.post('/', (req, res) => {
 

@@ -165,4 +165,3 @@ ALTER TABLE ONLY public.crud_user
 --
 -- PostgreSQL database dump complete
 --
-
