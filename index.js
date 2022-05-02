@@ -95,13 +95,12 @@ app.get('/booktable', function(req, res){
 	    console.log(err, crud_library_results)
 
 	    res.render('booktable', {
-		// databaseVersion: version_results.rows[0].version,
+		
 		crudLibraryMembers: crud_library_results.rows
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
 })
-	res.render('booktable.jade', { title: 'Book details' });
 });
 
 app.post('/', (req, res) => {

@@ -28,11 +28,11 @@ CREATE TABLE public.crud_library (
     id integer NOT NULL,
     book_title character varying(50),
     author_name character varying(50),
-    isbn character(17)
+    genre character varying(50),
+    isbn character(17),
+    books_available integer
 );
 
-
--- ALTER TABLE public.crud_library OWNER TO api_user;
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -46,8 +46,6 @@ CREATE SEQUENCE public.crud_library_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
--- ALTER TABLE public.crud_library_id_seq OWNER TO api_user;
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -69,8 +67,6 @@ CREATE TABLE public.crud_user (
 );
 
 
--- ALTER TABLE public.crud_user OWNER TO api_user;
-
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
 --
@@ -83,8 +79,6 @@ CREATE SEQUENCE public.crud_user_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
--- ALTER TABLE public.crud_user_id_seq OWNER TO api_user;
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -113,9 +107,9 @@ ALTER TABLE ONLY public.crud_user ALTER COLUMN id SET DEFAULT nextval('public.cr
 -- Data for Name: crud_library; Type: TABLE DATA; Schema: public; Owner: api_user
 --
 
-COPY public.crud_library (id, book_title, author_name, isbn) FROM stdin;
-1	Harry Potter and the Prisoner of Azkaban	J.K. Rowling	978-0-545582-93-3
-2	How To Train Your Dragon	Cressida Cowell	978-0-316085-27-4
+COPY public.crud_library (id, book_title, author_name, genre, isbn, books_available) FROM stdin;
+1	Harry Potter and the Prisoner of Azkaban	J.K. Rowling	Adventure / Mystery	978-0-545582-93-3	10
+2	How To Train Your Dragon	Cressida Cowell	Family Film	978-0-316085-27-4	6
 \.
 
 
@@ -126,6 +120,7 @@ COPY public.crud_library (id, book_title, author_name, isbn) FROM stdin;
 COPY public.crud_user (id, username, password, repassword, userrole) FROM stdin;
 1	RonWeasley	Scabbers	Scabbers	admin
 2	HarryPotter	Nimbus2000	Nimbus2000	admin
+3	NevilleLongbottom	Gryffindor	Gryffindor	admin
 \.
 
 
@@ -141,7 +136,7 @@ SELECT pg_catalog.setval('public.crud_library_id_seq', 2, true);
 -- Name: crud_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.crud_user_id_seq', 3, true);
 
 
 
@@ -165,3 +160,4 @@ ALTER TABLE ONLY public.crud_user
 --
 -- PostgreSQL database dump complete
 --
+
