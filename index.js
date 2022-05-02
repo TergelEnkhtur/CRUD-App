@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // form-urlencoded
 
-app.use(express.static(__dirname + "/views"))
+app.use(express.static(__dirname + "/public"))
 
 // Database
 const Pool = require('pg').Pool
@@ -105,7 +105,7 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO crud_library (book_title, author_name, isbn) VALUES ('${req.body.book_title}', '${req.body.author_name}' '${req.body.isbn}')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, result) => {
 
 	console.log(err, result)
 	
@@ -125,7 +125,7 @@ app.post('/register', (req, res) => {
 
 app.post('/bookTable', (req, res) => {
 
-	  pool.query(`INSERT INTO crud_library (book_title, author_name, isbn) VALUES ('${req.body.book_title}', '${req.body.author_name}' '${req.body.isbn}')`, (err, results) => {
+	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
   
 	  console.log(err, results)
 	  

@@ -1,20 +1,20 @@
 let bookTable = document.getElementById('bookTable')
 let addRowBtn = document.getElementById('addButton')
 
-let bookId = 1
-let bookTitleInp = document.querySelector('#bookTitle')
-let authorInp = document.querySelector('#author')
+let bookId = document.querySelector('#id')
+let book_titleInp = document.querySelector('#bookTitle')
+let author_nameInp = document.querySelector('#author')
 let genreInp = document.querySelector('#genre')
 let isbnInp = document.querySelector('#isbn')
-let quantityInp = document.querySelector('#quantity')
+let books_availableInp = document.querySelector('#quantity')
 
 addRowBtn.addEventListener('click', () => {
 
-    let bookTitle = bookTitleInp.value
-    let author = authorInp.value
+    let book_title = book_titleInp.value
+    let author_name = author_nameInp.value
     let genre = genreInp.value
     let isbn = isbnInp.value
-    let quantity = quantityInp.value
+    let books_available = books_availableInp.value
 
     if (validateForm() === true) {
         bookId = bookId + 1
@@ -23,11 +23,11 @@ addRowBtn.addEventListener('click', () => {
         let template = `
                         <tr>
                         <td id="row${bookId}">${bookId}</td>
-                        <td>${bookTitle}</td>
-                        <td>${author}</td>
+                        <td>${book_title}</td>
+                        <td>${author_name}</td>
                         <td>${genre}</td>
                         <td>${isbn}</td>
-                        <td>${quantity}</td>
+                        <td>${books_available}</td>
                         <td>
                     <button class="btn btn-sm btn-outline-secondary" id="editBtn" onClick="onEdit(this)" data-toggle="modal" data-target="#editModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -52,7 +52,7 @@ addRowBtn.addEventListener('click', () => {
 })
 
 function validateForm() {
-    if (bookTitleInp.value === "" || authorInp.value === "" || genreInp.value === "" || isbnInp.value === "" || quantityInp.value === "") {
+    if (book_titleInp.value === "" || author_nameInp.value === "" || genreInp.value === "" || isbnInp.value === "" || books_availableInp.value === "") {
         return false
     } else {
     return true
@@ -61,11 +61,11 @@ function validateForm() {
 
 function formClear() {
 
-    bookTitleInp.value = ""
-    authorInp.value = ""
+    book_titleInp.value = ""
+    author_nameInp.value = ""
     genreInp.value = ""
     isbnInp.value = ""
-    quantityInp.value = ""
+    books_availableInp.value = ""
     $('#bookModal').modal("hide")
 
 }
@@ -78,17 +78,17 @@ let selectedRow = null
 function onEdit(td) {
     selectedRow = null
     selectedRow = td.parentElement.parentElement
-    document.getElementById('editTitle').value = selectedRow.cells[1].innerHTML
-    document.getElementById('editAuthor').value = selectedRow.cells[2].innerHTML
+    document.getElementById('editBook_title').value = selectedRow.cells[1].innerHTML
+    document.getElementById('editAuthor_name').value = selectedRow.cells[2].innerHTML
     document.getElementById('editGenre').value = selectedRow.cells[3].innerHTML
     document.getElementById('editIsbn').value = selectedRow.cells[4].innerHTML
-    document.getElementById('editQuantity').value = selectedRow.cells[5].innerHTML
+    document.getElementById('editBooks_available').value = selectedRow.cells[5].innerHTML
     
 }
 $(document).on('click', '#saveModalButton', function updateRecord() {
-    selectedRow.cells[1].innerHTML = document.getElementById('editTitle').value
-    selectedRow.cells[2].innerHTML = document.getElementById('editAuthor').value
+    selectedRow.cells[1].innerHTML = document.getElementById('editBook_title').value
+    selectedRow.cells[2].innerHTML = document.getElementById('editAuthor_name').value
     selectedRow.cells[3].innerHTML = document.getElementById('editGenre').value
     selectedRow.cells[4].innerHTML = document.getElementById('editIsbn').value
-    selectedRow.cells[5].innerHTML = document.getElementById('editQuantity').value
+    selectedRow.cells[5].innerHTML = document.getElementById('editBooks_available').value
 })
