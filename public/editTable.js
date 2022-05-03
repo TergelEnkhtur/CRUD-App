@@ -2,19 +2,19 @@ let bookTable = document.getElementById('bookTable')
 let addRowBtn = document.getElementById('addButton')
 
 let bookId = document.querySelector('#id')
-let book_titleInp = document.querySelector('#bookTitle')
-let author_nameInp = document.querySelector('#author')
+let bookTitleInp = document.querySelector('#bookTitle')
+let authorInp = document.querySelector('#author')
 let genreInp = document.querySelector('#genre')
 let isbnInp = document.querySelector('#isbn')
-let books_availableInp = document.querySelector('#quantity')
+let quantityInp = document.querySelector('#quantity')
 
 addRowBtn.addEventListener('click', () => {
 
-    let book_title = book_titleInp.value
-    let author_name = author_nameInp.value
+    let bookTitle = bookTitleInp.value
+    let author = authorInp.value
     let genre = genreInp.value
     let isbn = isbnInp.value
-    let books_available = books_availableInp.value
+    let quantity = quantityInp.value
 
     if (validateForm() === true) {
         bookId = bookId + 1
@@ -23,11 +23,11 @@ addRowBtn.addEventListener('click', () => {
         let template = `
                         <tr>
                         <td id="row${bookId}">${bookId}</td>
-                        <td>${book_title}</td>
-                        <td>${author_name}</td>
+                        <td>${bookTitle}</td>
+                        <td>${author}</td>
                         <td>${genre}</td>
                         <td>${isbn}</td>
-                        <td>${books_available}</td>
+                        <td>${quantity}</td>
                         <td>
                     <button class="btn btn-sm btn-outline-secondary" id="editBtn" onClick="onEdit(this)" data-toggle="modal" data-target="#editModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -52,7 +52,7 @@ addRowBtn.addEventListener('click', () => {
 })
 
 function validateForm() {
-    if (book_titleInp.value === "" || author_nameInp.value === "" || genreInp.value === "" || isbnInp.value === "" || books_availableInp.value === "") {
+    if (bookTitleInp.value === "" || authorInp.value === "" || genreInp.value === "" || isbnInp.value === "" || quantityInp.value === "") {
         return false
     } else {
     return true
@@ -61,11 +61,11 @@ function validateForm() {
 
 function formClear() {
 
-    book_titleInp.value = ""
-    author_nameInp.value = ""
+    bookTitleInp.value = ""
+    authorInp.value = ""
     genreInp.value = ""
     isbnInp.value = ""
-    books_availableInp.value = ""
+    quantityInp.value = ""
     $('#bookModal').modal("hide")
 
 }

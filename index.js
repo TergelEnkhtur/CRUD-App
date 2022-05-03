@@ -105,7 +105,7 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', 'sad')`, (err, result) => {
 
 	console.log(err, result)
 	
@@ -125,7 +125,7 @@ app.post('/register', (req, res) => {
 
 app.post('/bookTable', (req, res) => {
 
-	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
+	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', 'sad')`, (err, results) => {
   
 	  console.log(err, results)
 	  
