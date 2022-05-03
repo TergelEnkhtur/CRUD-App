@@ -1,4 +1,4 @@
-let bookTable = document.getElementById('bookTable')
+let booktable = document.getElementById('booktable')
 let addRowBtn = document.getElementById('addButton')
 
 let bookId = document.querySelector('#id')
@@ -43,7 +43,7 @@ addRowBtn.addEventListener('click', () => {
                     </button>
                 </td>
                         </tr>`
-        bookTable.innerHTML += template
+        booktable.innerHTML += template
     } else {
         window.alert("Please fill out all information accurately!")
     }
