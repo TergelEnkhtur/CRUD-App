@@ -87,7 +87,7 @@ app.get('/login', function(req, res){
 	
 });
 
-// App Get - - Booktable Page
+// App Get - - Booktable Page - Read
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
@@ -105,7 +105,7 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', 'sad')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, result) => {
 
 	console.log(err, result)
 	
@@ -118,21 +118,35 @@ app.post('/register', (req, res) => {
     pool.query(`INSERT INTO crud_user (username, password, repassword, userrole) VALUES ('${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'admin')`, (err, results) => {
 
     console.log(err, results)
-    
+
     res.redirect('/')
     })
 })
 
+// App Get - - Booktable Page - Create
 app.post('/booktable', (req, res) => {
-
-	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', 'sad')`, (err, results) => {
+	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
   
 	  console.log(err, results)
 	  
-	  res.redirect('/')
+	  res.redirect('/booktable')
 	  })
   })
-  
+
+// App Get - - Booktable Page - Update
+app.put('/booktable', (req, res) => {
+
+console.log('patch')
+console.log(req.path)
+
+pool.query(`UPDATE crud_library SET book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = ${req.params["id"]}`, (err, result) => {
+	
+	console.log(err, result)
+	
+	res.redirect('/')
+})
+
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

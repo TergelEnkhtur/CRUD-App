@@ -7,7 +7,7 @@ let authorInp = document.querySelector('#author')
 let genreInp = document.querySelector('#genre')
 let isbnInp = document.querySelector('#isbn')
 let quantityInp = document.querySelector('#quantity')
-
+/*
 addRowBtn.addEventListener('click', () => {
 
     let bookTitle = bookTitleInp.value
@@ -50,7 +50,7 @@ addRowBtn.addEventListener('click', () => {
 
 
 })
-
+*/
 function validateForm() {
     if (bookTitleInp.value === "" || authorInp.value === "" || genreInp.value === "" || isbnInp.value === "" || quantityInp.value === "") {
         return false
