@@ -1,0 +1,21 @@
+form(action='/booktable/#{book.id}' method='post' name='edit')
+              .modal-body 
+                .form-group
+                  label(for='book_title') Book Title
+                  input#book_title.form-control(type='text' placeholder='Book Title', name="book_title")
+                .form-group
+                  label(for='author_name') Author
+                  input#author_name.form-control(type='text' placeholder="Author's name", name="author_name")
+                .form-group
+                  label(for='genre') Genre
+                  input#genre.form-control(type='text' placeholder="Book's genre", name="genre")
+                .form-group
+                  label(for='isbn') ISBN Number
+                  input#isbn.form-control(type='text' placeholder='Enter ISBN', name="isbn")
+                  small#isbnHelp.form-text.text-muted Ex: 978-3-16-148410-0
+                .form-group
+                  label(for='books_available') Books Quantity Donated
+                  input#books_available.form-control(type='text' placeholder='Enter quantity', name="books_available")
+              .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                button#saveModalButton.btn.btn-primary(type="submit" data-dismiss='modal') Save changes

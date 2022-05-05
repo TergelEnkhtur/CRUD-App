@@ -105,9 +105,9 @@ app.get('/booktable', function(req, res){
 
 app.post('/', (req, res) => {
 
-    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, result) => {
+    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
 
-	console.log(err, result)
+	console.log(err, results)
 	
 	res.redirect('/')
     })
@@ -134,18 +134,36 @@ app.post('/booktable', (req, res) => {
   })
 
 // App Get - - Booktable Page - Update
-app.put('/booktable', (req, res) => {
+app.get('/booktable/:id', (req, res) => {
 
-console.log('patch')
-console.log(req.path)
+	pool.query(`SELECT * FROM crud_library WHERE id = '${req.params.id}'`, (err, crud_library_results) => {
+	    console.log(err, crud_library_results)
 
-pool.query(`UPDATE crud_library SET book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = ${req.params["id"]}`, (err, result) => {
-	
-	console.log(err, result)
-	
-	res.redirect('/')
+	    
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+		res.render('book_form',{book:crud_library_results.rows[0]})
+	})
 })
 
+// App Get - - Booktable Page - Update
+app.post('/booktable/:id', (req, res) => {
+	console.log(req.body)
+	pool.query(`UPDATE crud_library SET book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
+	
+	console.log(err, results)
+	
+	res.redirect('/booktable')
+	})
+})
+
+// App Get - - Booktable Page - Delete
+app.put('/booktable', (req, res) => {
+	pool.query(`DELETE crud_library FROM book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
+	
+	console.log(err, results)
+	
+	res.redirect('/booktable')
+	})
 })
 
 app.listen(port, () => {

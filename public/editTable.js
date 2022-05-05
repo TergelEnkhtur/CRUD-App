@@ -1,3 +1,4 @@
+/*
 let booktable = document.getElementById('booktable')
 let addRowBtn = document.getElementById('addButton')
 
@@ -50,7 +51,7 @@ addRowBtn.addEventListener('click', () => {
 
 
 })
-*/
+
 function validateForm() {
     if (bookTitleInp.value === "" || authorInp.value === "" || genreInp.value === "" || isbnInp.value === "" || quantityInp.value === "") {
         return false
@@ -92,3 +93,4 @@ $(document).on('click', '#saveModalButton', function updateRecord() {
     selectedRow.cells[4].innerHTML = document.getElementById('editIsbn').value
     selectedRow.cells[5].innerHTML = document.getElementById('editBooks_available').value
 })
+*/
