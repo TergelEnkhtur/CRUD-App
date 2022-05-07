@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000
 const path = require('path');
 
 // Set the view engine for the express app
-app.set("view engine", "jade")
+app.set("view engine", "pug")
 
 // for parsing application/json
 app.use(bodyParser.json());
@@ -59,7 +59,7 @@ pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
     })
-    res.render('index.jade', { title: 'home page' });
+    res.render('index.pug', { title: 'home page' });
 });
 
 // App Get - - Register Page
@@ -76,14 +76,14 @@ app.get('/register', function(req, res){
 	    )
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
-  res.render('register.jade', { title: 'Sign up here' });
+  res.render('register.pug', { title: 'Sign up here' });
   
 });
 
 // App Get - - Login Page
 app.get('/login', function(req, res){
 
-    res.render('login.jade', { title: 'login  here' });
+    res.render('login.pug', { title: 'login  here' });
 	
 });
 
