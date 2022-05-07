@@ -26,6 +26,8 @@
     "save": "^2.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "chai": "^4.3.6",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   }
 }
