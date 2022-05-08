@@ -108,6 +108,22 @@ app.post('/register', (req, res) => {
     })
 })
 
+// Usertable Page - Read
+app.get('/usertable', function(req, res){
+	console.log('Accept: ' + req.get('Accept'))
+	
+	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
+	    console.log(err, crud_user_results)
+
+	    res.render('usertable', {
+		
+		crudUserMembers: crud_user_results.rows
+	    })
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	
+	})
+});
+
 // Booktable Page - Create
 app.post('/booktable', (req, res) => {
 	pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
@@ -118,7 +134,7 @@ app.post('/booktable', (req, res) => {
 	})
 })
 
-  // Booktable Page - Read
+// Booktable Page - Read
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
