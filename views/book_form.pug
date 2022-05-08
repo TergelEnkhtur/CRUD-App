@@ -13,20 +13,20 @@ html(lang='en')
       form(action='/booktable/#{book.id}' method='post' name='edit')
         .form-group
           label(for='book_title') Book Title
-          input#book_title.form-control(type='text' placeholder='Book Title' name='book_title' value='book.book_title')
+          input#book_title.form-control(type='text' placeholder='Book Title' name='book_title')
         .form-group
           label(for='author_name') Author
-          input#author_name.form-control(type='text' placeholder="Author's name" name='author_name' value='book.author_name')
+          input#author_name.form-control(type='text' placeholder="Author's name" name='author_name')
         .form-group
           label(for='genre') Genre
-          input#genre.form-control(type='text' placeholder="Book's genre" name='genre' value='book.genre')
+          input#genre.form-control(type='text' placeholder="Book's genre" name='genre')
         .form-group
           label(for='isbn') ISBN Number
-          input#isbn.form-control(type='text' placeholder='Enter ISBN' name='isbn' value='book.isbn')
+          input#isbn.form-control(type='text' placeholder='Enter ISBN' name='isbn')
           small#isbnHelp.form-text.text-muted Ex: 978-3-16-148410-0
         .form-group
           label(for='books_available') Books Quantity Donated
-          input#books_available.form-control.mb-4(type='text' placeholder='Enter quantity' name='books_available' value='book.quantity')
+          input#books_available.form-control.mb-4(type='text' placeholder='Enter quantity' name='books_available')
         .container.text-center
           button#saveModalButton.btn.btn-primary(type='submit') Save changes
           a.btn.btn-secondary(href='/booktable') Close
