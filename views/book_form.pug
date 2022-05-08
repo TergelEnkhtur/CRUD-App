@@ -26,7 +26,7 @@ html(lang='en')
           small#isbnHelp.form-text.text-muted Ex: 978-3-16-148410-0
         .form-group
           label(for='books_available') Books Quantity Donated
-          input#books_available.form-control.mb-4(type='text' placeholder='Enter quantity' name='books_available')
+          input#books_available.form-control.mb-4(type='number' placeholder='Enter quantity' name='books_available')
         .container.text-center
           button#saveModalButton.btn.btn-primary(type='submit') Save changes
           a.btn.btn-secondary(href='/booktable') Close
