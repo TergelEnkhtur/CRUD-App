@@ -48,6 +48,14 @@ describe('The express server', function () {
         .end(done);
         });
 
+        it('check app status', function (done) {
+            chai.request(server).get('/').end((err, res) => {
+              should.not.exist(err);
+              res.should.have.status(200);
+              done();
+            })
+          });
+
         // it('should respond to invalid POST requests for the root path, with a error',
         // function(done) {
         //     request(server)
