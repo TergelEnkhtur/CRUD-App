@@ -87,21 +87,6 @@ app.get('/login', function(req, res){
 	
 });
 
-// App Get - - Booktable Page - Read
-app.get('/booktable', function(req, res){
-	console.log('Accept: ' + req.get('Accept'))
-	
-	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
-	    console.log(err, crud_library_results)
-
-	    res.render('booktable', {
-		
-		crudLibraryMembers: crud_library_results.rows
-	    })
-	    console.log('Content-Type: ' + res.get('Content-Type'))
-	
-})
-});
 
 app.post('/', (req, res) => {
 
@@ -123,17 +108,33 @@ app.post('/register', (req, res) => {
     })
 })
 
-// App Get - - Booktable Page - Create
+// Booktable Page - Create
 app.post('/booktable', (req, res) => {
-	  pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
-  
-	  console.log(err, results)
-	  
-	  res.redirect('/booktable')
-	  })
-  })
+	pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
 
-// App Get - - Booktable Page - Update
+		console.log(err, results)
+	
+		res.redirect('/booktable')
+	})
+})
+
+  // Booktable Page - Read
+app.get('/booktable', function(req, res){
+	console.log('Accept: ' + req.get('Accept'))
+	
+	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
+	    console.log(err, crud_library_results)
+
+	    res.render('booktable', {
+		
+		crudLibraryMembers: crud_library_results.rows
+	    })
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	
+	})
+});
+
+// Booktable Page - Update
 app.get('/booktable/:id', (req, res) => {
 
 	pool.query(`SELECT * FROM crud_library WHERE id = '${req.params.id}'`, (err, crud_library_results) => {
@@ -145,7 +146,6 @@ app.get('/booktable/:id', (req, res) => {
 	})
 })
 
-// App Get - - Booktable Page - Update
 app.post('/booktable/:id', (req, res) => {
 	console.log(req.body)
 	pool.query(`UPDATE crud_library SET book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
@@ -156,15 +156,20 @@ app.post('/booktable/:id', (req, res) => {
 	})
 })
 
-// App Get - - Booktable Page - Delete
-app.put('/booktable', (req, res) => {
-	pool.query(`DELETE crud_library FROM book_title='${req.body.book_title}', author_name='${req.body.author_name}', genre='${req.body.genre}', isbn='${req.body.isbn}', books_available='${req.body.books_available}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
-	
-	console.log(err, results)
-	
-	res.redirect('/booktable')
+// Booktable Page - Delete
+app.delete('/booktable/:id', (req, res) => {
+
+	const id = req.params["id"]
+  
+	console.log(id)
+  
+	pool.query(`DELETE FROM crud_library WHERE id = ${id}`, (err, result) => {
+	  console.log(err)
+	  
+	  res.redirect('/booktable')
 	})
 })
+
 
 // app.listen(port, () => {
 //     console.log(`Example app listening on port ${port}`)
