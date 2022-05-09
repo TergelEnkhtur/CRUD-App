@@ -1,5 +1,4 @@
 doctype html
-
 html(lang='en')
   head
     // Required meta tags
@@ -17,14 +16,17 @@ html(lang='en')
         h3.card-title.text-center Create an Account
         form(action='/register' method='post' name='registerForm')
           .form-group
+            label(for='nameInput') Full Name: 
+            input#nameInput.form-control.mb-2(type='text' placeholder='Enter Full Name' name='fullName')
+          .form-group
             label(for='usernameInput') Username: 
-            input#usernameInput.form-control.mb-2(type='text' placeholder='Enter username', name="username")
+            input#usernameInput.form-control.mb-2(type='text' placeholder='Enter username' name='username')
           .form-group
             label(for='passwordInput') Password: 
-            input#passwordInput.form-control.mb-2(type='password' placeholder='Enter password', name="password")
+            input#passwordInput.form-control.mb-2(type='password' placeholder='Enter password' name='password')
           .form-group
             label(for='passwordInputRepeat') Re-Enter Password: 
-            input#passwordInputRepeat.form-control.mb-3(type='password' placeholder='Re-enter password', name="repassword")
+            input#passwordInputRepeat.form-control.mb-3(type='password' placeholder='Re-enter password' name='repassword')
           .container.text-center
             button.btn.btn-primary(type='submit') Submit
             a.btn.btn-secondary(href='/') Return to the Home Page
