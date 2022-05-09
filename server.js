@@ -41,45 +41,15 @@ const pool = new Pool(connectionParams)
 
 // All Main App Controls
 
-// App Get Controls
+// Home Page - Get
 app.get('/', (req, res) => {
     
     console.log('Accept: ' + req.get('Accept'))
-    
-    pool.query('SELECT VERSION()', (err, version_results) => {
-	console.log(err, version_results)
 
-pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {            
-	            console.log(err, crud_library_results)
-													    
-	    res.render('index', {
-		crudLibraryMembers: crud_library_results
-	    })
-	    
-	    console.log('Content-Type: ' + res.get('Content-Type'))
-	})
-    })
     res.render('index.pug', { title: 'home page' });
 });
 
-// App Get - - Login Page
-app.get('/login', function(req, res){
-
-    res.render('login.pug', { title: 'login  here' });
-	
-});
-
-
-app.post('/', (req, res) => {
-
-    pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
-
-	console.log(err, results)
-	
-	res.redirect('/')
-    })
-})
-
+// Register Page - Create
 app.post('/register', (req, res) => {
 
     pool.query(`INSERT INTO crud_user (fullname, username, password, repassword, userrole) VALUES ('${req.body.fullname}', '${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'patron')`, (err, results) => {
@@ -90,7 +60,6 @@ app.post('/register', (req, res) => {
     })
 })
 
-// crud_user
 // Register Page - Create
 app.get('/register', function(req, res){
     console.log('Accept: ' + req.get('Accept'))
@@ -105,6 +74,14 @@ app.get('/register', function(req, res){
   res.render('register.pug', { title: 'Sign up here' });
 });
 
+// Login Page - Get
+app.get('/login', function(req, res){
+
+    res.render('login.pug', { title: 'login  here' });
+	
+});
+
+// crud_user
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
