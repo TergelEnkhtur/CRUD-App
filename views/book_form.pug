@@ -10,7 +10,7 @@ html(lang='en')
   body
     h1.text-center.m-3 Edit Book
     .container
-      form(action='/booktable/#{book.id}' method='post' name='edit')
+      form(action=`/booktable/${book.id}` method='post' name='edit')
         .form-group
           label(for='book_title') Book Title
           input#book_title.form-control(type='text' placeholder='Book Title' name='book_title')

@@ -10,7 +10,7 @@ html(lang='en')
   body
     h1.text-center.m-3 Edit User
     .container
-      form(action='/usertable/#{user.id}' method='post' name='edit')
+      form(action=`/usertable/${user.id}` method='post' name='edit')
         .form-group
           label(for='fullname') Full Name
           input#fullname.form-control(type='text' placeholder='Full Name' name='fullname')
