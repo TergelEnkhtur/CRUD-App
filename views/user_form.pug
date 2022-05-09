@@ -10,16 +10,16 @@ html(lang='en')
   body
     h1.text-center.m-3 Edit User
     .container
-      form(action='/usertable/#{book.id}' method='post' name='edit')
+      form(action='/usertable/#{user.id}' method='post' name='edit')
         .form-group
           label(for='fullname') Full Name
-          input#book_title.form-control(type='text' placeholder='Full Name' name='fullname')
+          input#fullname.form-control(type='text' placeholder='Full Name' name='fullname')
         .form-group
           label(for='username') User Name
-          input#author_name.form-control(type='text' placeholder="User Name" name='username')
+          input#username.form-control(type='text' placeholder="User Name" name='username')
         .form-group
           label(for='password') Password
-          input#genre.form-control(type='text' placeholder="Password" name='password')
+          input#password.form-control(type='text' placeholder="Password" name='password')
         .container.text-center
           button#saveModalButton.btn.btn-primary(type='submit') Save changes
           a.btn.btn-secondary(href='/usertable') Close

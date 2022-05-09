@@ -129,13 +129,13 @@ app.get('/usertable/:id', (req, res) => {
 
 	    
 	    console.log('Content-Type: ' + res.get('Content-Type'))
-		res.render('user_form',{book:crud_user_results.rows[0]})
+		res.render('user_form',{user:crud_user_results.rows[0]})
 	})
 })
 
 app.post('/usertable/:id', (req, res) => {
 	console.log(req.body)
-	pool.query(`UPDATE crud_user SET fullname='${req.body.book_fullname}', username='${req.body.username}', password='${req.body.password}', repassword='${req.body.password}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
+	pool.query(`UPDATE crud_user SET fullname='${req.body.fullname}', username='${req.body.username}', password='${req.body.password}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
 	
 	console.log(err, results)
 	
