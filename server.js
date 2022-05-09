@@ -62,24 +62,6 @@ pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
     res.render('index.pug', { title: 'home page' });
 });
 
-// App Get - - Register Page
-app.get('/register', function(req, res){
-    console.log('Accept: ' + req.get('Accept'))
-    	
-	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
-	    console.log(err, crud_user_results)
-													    
-	    res.render('register'
-	//	teamNumber: 1,
-	//	databaseVersion: version_results.rows[0].version,
-	//	user_l: user_l_results.rows
-	    )
-	    console.log('Content-Type: ' + res.get('Content-Type'))
-	})
-  res.render('register.pug', { title: 'Sign up here' });
-  
-});
-
 // App Get - - Login Page
 app.get('/login', function(req, res){
 
@@ -108,6 +90,21 @@ app.post('/register', (req, res) => {
     })
 })
 
+// crud_user
+// Register Page - Create
+app.get('/register', function(req, res){
+    console.log('Accept: ' + req.get('Accept'))
+    	
+	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
+	    console.log(err, crud_user_results)
+													    
+	    res.render('register'
+	    )
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	})
+  res.render('register.pug', { title: 'Sign up here' });
+});
+
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
@@ -124,6 +121,43 @@ app.get('/usertable', function(req, res){
 	})
 });
 
+// Usertable Page - Update
+app.get('/usertable/:id', (req, res) => {
+
+	pool.query(`SELECT * FROM crud_user WHERE id = '${req.params.id}'`, (err, crud_user_results) => {
+	    console.log(err, crud_user_results)
+
+	    
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+		res.render('user_form',{book:crud_user_results.rows[0]})
+	})
+})
+
+app.post('/usertable/:id', (req, res) => {
+	console.log(req.body)
+	pool.query(`UPDATE crud_user SET fullname='${req.body.book_fullname}', username='${req.body.username}', password='${req.body.password}', repassword='${req.body.password}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
+	
+	console.log(err, results)
+	
+	res.redirect('/usertable')
+	})
+})
+
+// Usertable Page - Delete
+app.delete('/usertable/:id', (req, res) => {
+
+	const id = req.params["id"]
+  
+	console.log(id)
+  
+	pool.query(`DELETE FROM crud_user WHERE id = ${id}`, (err, result) => {
+	  console.log(err)
+	  
+	  res.redirect('/usertable')
+	})
+})
+
+// crud_library
 // Booktable Page - Create
 app.post('/booktable', (req, res) => {
 	pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
