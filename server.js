@@ -100,7 +100,7 @@ app.post('/', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    pool.query(`INSERT INTO crud_user (username, password, repassword, userrole) VALUES ('${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'admin')`, (err, results) => {
+    pool.query(`INSERT INTO crud_user (fullname, username, password, repassword, userrole) VALUES ('${req.body.fullname}', '${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'patron')`, (err, results) => {
 
     console.log(err, results)
 
