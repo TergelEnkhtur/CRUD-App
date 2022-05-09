@@ -198,6 +198,7 @@ app.post('/booktable', (req, res) => {
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
+	//req.query.search_param
 	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
 	    console.log(err, crud_library_results)
 
