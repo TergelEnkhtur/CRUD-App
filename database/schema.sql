@@ -34,6 +34,8 @@ CREATE TABLE public.crud_library (
 );
 
 
+ALTER TABLE public.crud_library OWNER TO api_user;
+
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
 --
@@ -46,6 +48,8 @@ CREATE SEQUENCE public.crud_library_id_seq
     NO MAXVALUE
     CACHE 1;
 
+
+ALTER TABLE public.crud_library_id_seq OWNER TO api_user;
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -60,12 +64,15 @@ ALTER SEQUENCE public.crud_library_id_seq OWNED BY public.crud_library.id;
 
 CREATE TABLE public.crud_user (
     id integer NOT NULL,
+    fullname character varying(50),
     username character varying(25) NOT NULL,
     password character varying(25) NOT NULL,
     repassword character varying(25) NOT NULL,
     userrole character varying(10) NOT NULL
 );
 
+
+ALTER TABLE public.crud_user OWNER TO api_user;
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -79,6 +86,8 @@ CREATE SEQUENCE public.crud_user_id_seq
     NO MAXVALUE
     CACHE 1;
 
+
+ALTER TABLE public.crud_user_id_seq OWNER TO api_user;
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -108,8 +117,9 @@ ALTER TABLE ONLY public.crud_user ALTER COLUMN id SET DEFAULT nextval('public.cr
 --
 
 COPY public.crud_library (id, book_title, author_name, genre, isbn, books_available) FROM stdin;
-1	Harry Potter and the Prisoner of Azkaban	J.K. Rowling	Adventure / Mystery	978-0-545582-93-3	10
-2	How To Train Your Dragon	Cressida Cowell	Family Film	978-0-316085-27-4	6
+10	Grit: The Power of Passion and Perseverance	Angela Duckworth	Self-help book	978-1-501111-10-9	123
+16	s	s	s	978-3-16-148410-3	15
+17	q	q	q	978-3-16-148410-3	43
 \.
 
 
@@ -117,10 +127,9 @@ COPY public.crud_library (id, book_title, author_name, genre, isbn, books_availa
 -- Data for Name: crud_user; Type: TABLE DATA; Schema: public; Owner: api_user
 --
 
-COPY public.crud_user (id, username, password, repassword, userrole) FROM stdin;
-1	RonWeasley	Scabbers	Scabbers	admin
-2	HarryPotter	Nimbus2000	Nimbus2000	admin
-3	NevilleLongbottom	Gryffindor	Gryffindor	admin
+COPY public.crud_user (id, fullname, username, password, repassword, userrole) FROM stdin;
+6	Ronald Weasley	RonWeasley	Scabbers	Scabbers	admin
+7	Harry Potter	HarryPotter	Nimbus2000	Nimbus2000	admin
 \.
 
 
@@ -129,14 +138,14 @@ COPY public.crud_user (id, username, password, repassword, userrole) FROM stdin;
 -- Name: crud_library_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_library_id_seq', 2, true);
+SELECT pg_catalog.setval('public.crud_library_id_seq', 19, true);
 
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_user_id_seq', 3, true);
+SELECT pg_catalog.setval('public.crud_user_id_seq', 7, true);
 
 
 
