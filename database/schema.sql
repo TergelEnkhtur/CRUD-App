@@ -75,6 +75,17 @@ CREATE TABLE public.crud_user (
 ALTER TABLE public.crud_user OWNER TO api_user;
 
 --
+-- Name: crud_admin; Type: TABLE; Schema: public; Owner: api_user
+--
+
+--CREATE TABLE public.crud_admin (
+--	username character varying(25) NOT NULL,
+--	password character varying(25) NOT NULL
+--);
+
+--ALTER TABLE public.crud_admin OWNER TO api_user;
+
+--
 -- Name: crud_user_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
 --
 
@@ -169,4 +180,3 @@ ALTER TABLE ONLY public.crud_user
 --
 -- PostgreSQL database dump complete
 --
-
