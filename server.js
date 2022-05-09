@@ -1,5 +1,6 @@
 // Order matters ! 
 const express = require('express')
+// const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000
@@ -80,6 +81,54 @@ app.get('/login', function(req, res){
     res.render('login.pug', { title: 'login  here' });
 	
 });
+
+
+//beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
+/* app.get('/login', function(req, res){
+
+    res.render('login.pug', { title: 'login  here' });
+	
+	if (!req.session.loggedin){
+		//in case they are not logged in
+		res.send('Please login to view this page!');
+	}
+	
+	res.end();
+});
+
+app.post('/login', function(req, res) {
+	//grabbing the input from the fields
+	let username = req.body.username;
+	let password = req.body.password;
+	
+	//moves foward if the fields are not empty
+	if (username && password) {
+		//makes a SQL query that retrieves username and password from DB
+		pool.query('SELECT * FROM crud_user WHERE username = ? AND password = ? AND userrole = "admin"', [username, password, userrole], function(error, results, fields) {
+			//now that we retrieved the accounts from the crud_user table
+			
+			//prints the error if there is one
+			if (error) throw error;
+
+			//if the account exists
+			if (results.length > 0) {
+				//this throws a boolean flag that makes a loggedin session true or not which shows whether
+				//someone is allowed to view something.
+				req.session.loggedin = true;
+				req.session.username = username;
+				// redirects to the book table
+				res.redirect('/booktable');
+			} else {
+				res.send('Incorrect Credentials.');
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter a Username and Password!');
+		res.end();
+	}
+}); */
+
 
 // crud_user
 // Usertable Page - Read
