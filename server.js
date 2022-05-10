@@ -1,6 +1,6 @@
 // Order matters ! 
 const express = require('express')
-const session = require('express-session')
+// const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000
@@ -18,14 +18,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // form-urlencoded
 
 app.use(express.static(__dirname + "/public"))
-
+/*
 app.use(session({
 	genid: function(req) {
 	  return genuuid() // use UUIDs for session IDs
 	},
 	secret: 'keyboard cat'
   }))
-  
+*/  
 // Database
 const Pool = require('pg').Pool
 
