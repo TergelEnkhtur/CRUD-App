@@ -14,7 +14,7 @@ html(lang='en')
       p.text-center Enter your username and password below
     .container-fluid.w-50
       .card.p-5
-        form(_lpchecked='1')
+        form(action=`/login`, _lpchecked='1', method='post')
           h1.h3.mb-3.fw-formal Please log in
           .form-floating
             input#floatingInput.form-control(type='username' placeholder='Username', name="username")
