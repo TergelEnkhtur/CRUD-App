@@ -15,6 +15,11 @@ script.
     })
   }
 
+script.
+  const reloadPage = function() {
+  location.reload()
+  }
+
 html(lang='en')
   head
     // Required meta tags
@@ -31,15 +36,15 @@ html(lang='en')
         .container
           .row
             .col-xs-8.col-xs-offset-2
-              form#searchForm.input-group.mb-3(action='#' method='get')
+              form#searchForm.input-group.mb-3(action='/booktable' method='get')
                 .input-group-btn.search-panel
                   select#search_param.btn.btn-default.dropdown-toggle(name='search_param' data-toggle='dropdown')
-                    option(value='title') Book Title
-                    option(value='isbn') ISBN #
-                    option(value='author') Author
+                    option(value='book_title') Book Title
+                    option(value='author_name') Author
                     option(value='genre') Genre
+                    option(value='isbn') ISBN #
                     option(value='books_available') Books Available
-                input.form-control.mx-3.mb-3(type='text' name='x' placeholder='Search term...')
+                input.form-control.mx-3.mb-3(type='text' name='searchEntry' placeholder='Search term...')
                 span.input-group-btn
                   button.btn.btn-outline-dark(type='submit')
                     svg.bi.bi-search(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16')

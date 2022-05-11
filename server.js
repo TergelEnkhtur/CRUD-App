@@ -105,6 +105,7 @@ app.get('/login', function(req, res){
 	res.end();
 });
 
+
 app.post('/login', function(req, res) {
 	//grabbing the input from the fields
 	let username = req.body.username;
@@ -128,7 +129,7 @@ app.post('/login', function(req, res) {
 				// req.session.loggedin = true;
 				// req.session.username = username;
 				// redirects to the book table
-				res.redirect('/booktable');
+				res.redirect('/user_logged_in_homepage');
 			} else {
 				res.send('Incorrect Credentials.');
 			}			
@@ -140,6 +141,18 @@ app.post('/login', function(req, res) {
 	}
 }); 
 
+app.get('/user_logged_in_homepage', function(req, res){
+
+    res.render('user_logged_in_homepage.pug', { title: 'login  here' });
+	
+	if (!req.session.loggedin){
+
+		// in case they are not logged in
+		res.send('Please login to view this page!');
+	}
+	
+	res.end();
+});
 
 // crud_user
 // Usertable Page - Read
@@ -208,9 +221,7 @@ app.post('/booktable', (req, res) => {
 // Booktable Page - Read
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
-	
-	//req.query.search_param
-	pool.query('SELECT * FROM crud_library', (err, crud_library_results) => {
+	pool.query(`SELECT * FROM crud_library`, (err, crud_library_results) => {
 	    console.log(err, crud_library_results)
 
 	    res.render('booktable', {
@@ -220,6 +231,35 @@ app.get('/booktable', function(req, res){
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
 	})
+});
+
+// SELECT * FROM crud_library WHERE '${req.params.search_param}' = '${req.params.searchEntry}
+/*
+// Booktable Page - Read Search
+app.get('/booktable', function(req, res){
+	console.log("searchBar")
+	console.log(`${req.query.search_param}`)
+	console.log(`${req.query.searchEntry}`)
+	console.log(`${req.query.searchEntry}` == 'undefined')
+	//if (`${req.query.searchEntry}` == 'undefined') {location.reload()}
+	var searchTerm = `${req.query.searchEntry}`
+	console.log(searchTerm)
+	pool.query(`SELECT * FROM crud_library WHERE '${req.query.search_param}' = 'Harry Potter'`, (err, crud_library_results) => {
+	    console.log(err, crud_library_results)
+		 
+		res.render('booktable', {
+		crudLibraryMembers: crud_library_results.rows
+		})
+		console.log('Content-Type: ' + res.get('Content-Type'))
+		
+		//res.send('id: ' + req.query.id);
+	})
+});
+*/
+app.get('/booktable', function(req, res){
+	console.log("searchBar on second")
+	console.log(`${req.params.searchBar}`)
+	console.log(`${req.params.searchBar}` == 'undefined')
 });
 
 // Booktable Page - Update
