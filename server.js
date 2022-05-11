@@ -217,7 +217,7 @@ app.post('/booktable', (req, res) => {
 		res.redirect('/booktable')
 	})
 })
-/*
+
 // Booktable Page - Read
 app.get('/booktable', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
@@ -232,18 +232,19 @@ app.get('/booktable', function(req, res){
 	
 	})
 });
-*/
-// SELECT * FROM crud_library WHERE '${req.params.search_param}' = '${req.params.searchEntry}
 
+// SELECT * FROM crud_library WHERE '${req.params.search_param}' = '${req.params.searchEntry}
+/*
 // Booktable Page - Read Search
 app.get('/booktable', function(req, res){
 	console.log("searchBar")
 	console.log(`${req.query.search_param}`)
 	console.log(`${req.query.searchEntry}`)
-	console.log(`${req.params.searchBar}` == 'undefined')
-	var searchTerm = `${req.params.searchBar}`
+	console.log(`${req.query.searchEntry}` == 'undefined')
+	//if (`${req.query.searchEntry}` == 'undefined') {location.reload()}
+	var searchTerm = `${req.query.searchEntry}`
 	console.log(searchTerm)
-	pool.query(`SELECT * FROM crud_library WHERE book_title = 'Harry Potter'`, (err, crud_library_results) => {
+	pool.query(`SELECT * FROM crud_library WHERE '${req.query.search_param}' = 'Harry Potter'`, (err, crud_library_results) => {
 	    console.log(err, crud_library_results)
 		 
 		res.render('booktable', {
@@ -254,7 +255,7 @@ app.get('/booktable', function(req, res){
 		//res.send('id: ' + req.query.id);
 	})
 });
-
+*/
 app.get('/booktable', function(req, res){
 	console.log("searchBar on second")
 	console.log(`${req.params.searchBar}`)
