@@ -1,4 +1,19 @@
 doctype html
+
+script.
+  function matchPassword() {
+    var pw1 = document.getElementById('passwordInput').value;
+    var pw2 = document.getElementById('passwordInputRepeat').value;
+      if(pw1 != pw2)
+      {
+        alert("Passwords did not match");
+        return false;
+      } else {
+        alert("Password created successfully");
+        return true;
+      }
+  }
+
 html(lang='en')
   head
     // Required meta tags
@@ -28,7 +43,7 @@ html(lang='en')
             label(for='passwordInputRepeat') Re-Enter Password: 
             input#passwordInputRepeat.form-control.mb-3(type='password' placeholder='Re-enter password' name='repassword')
           .container.text-center
-            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary(type='submit', onclick="return matchPassword()") Submit
             a.btn.btn-secondary(href='/') Return to the Home Page
     // Option 1: Bootstrap Bundle with Popper
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
