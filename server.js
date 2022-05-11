@@ -25,7 +25,8 @@ app.use(session({
 	},
 	secret: 'keyboard cat'
   }))
-*/  
+*/
+  
 // Database
 const Pool = require('pg').Pool
 
@@ -82,7 +83,7 @@ app.get('/register', function(req, res){
   res.render('register.pug', { title: 'Sign up here' });
 });
 
-// Login Page - Get
+// Login Page - Get Login Pug Page
 app.get('/login', function(req, res){
 
     res.render('login.pug', { title: 'login  here' });
@@ -90,13 +91,14 @@ app.get('/login', function(req, res){
 });
 
 
-//beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
+// Beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
 app.get('/login', function(req, res){
 
     res.render('login.pug', { title: 'login  here' });
 	
 	if (!req.session.loggedin){
-		//in case they are not logged in
+
+		// in case they are not logged in
 		res.send('Please login to view this page!');
 	}
 	
@@ -255,8 +257,6 @@ app.delete('/booktable/:id', (req, res) => {
 	  res.redirect('/booktable')
 	})
 })
-
-
 
 // app.listen(port, () => {
 //     console.log(`Example app listening on port ${port}`)
