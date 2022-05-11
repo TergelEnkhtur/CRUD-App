@@ -41,6 +41,17 @@ describe('The express server', function () {
                 });
         });
 
+    //Test #3 - Responding to nonexistent POST requests for the root path with any error
+    it('should respond to nonexistent POST requests for the root path, with any error',
+        
+        function(done) {
+
+            request(server)
+                .post('/')
+                .expect(404)
+                .end(done);
+        });
+
     after(function(done) {
         app.close(function() {
             done();
