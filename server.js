@@ -226,7 +226,7 @@ app.get('/booktable', function(req, res){
 	var query = `SELECT * FROM crud_library`;
 
 	if (searchTerm != undefined && searchParam != undefined) {
-		query = `SELECT * FROM crud_library WHERE ${searchParam} = '${searchTerm}'`;
+		query = `SELECT * FROM crud_library WHERE ${searchParam} LIKE '%${searchTerm}%'`;
 	}
 	if (searchTerm == '')
 	{
