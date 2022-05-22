@@ -12,6 +12,7 @@ html(lang='en')
     .container-fluid.py-3
       h1.text-center Login page
       p.text-center Enter your username and password below
+      p.text-center #{error}
     .container-fluid.w-50
       .card.p-5
         form(action=`/login`, _lpchecked='1', method='post')

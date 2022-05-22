@@ -82,14 +82,14 @@ app.get('/register', function(req, res){
 	})
   res.render('register.pug', { title: 'Sign up here' });
 });
-
+/*
 // Login Page - Get Login Pug Page
 app.get('/login', function(req, res){
 
     res.render('login.pug', { title: 'login  here' });
 	
 });
-
+*/
 
 // Beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
 app.get('/login', function(req, res){
@@ -131,7 +131,8 @@ app.post('/login', function(req, res) {
 				// redirects to the book table
 				res.redirect('/user_logged_in_homepage');
 			} else {
-				res.send('Incorrect Credentials.');
+				// res.send('Incorrect Credentials.');
+				res.render('login.pug', { title: 'login  here', error: 'Incorrect Credentials.'});
 			}			
 			res.end();
 		});
@@ -220,46 +221,27 @@ app.post('/booktable', (req, res) => {
 
 // Booktable Page - Read
 app.get('/booktable', function(req, res){
-	console.log('Accept: ' + req.get('Accept'))
-	pool.query(`SELECT * FROM crud_library`, (err, crud_library_results) => {
-	    console.log(err, crud_library_results)
+	var searchTerm = req.query.searchTerm;
+	var searchParam = req.query.search_param;
+	var query = `SELECT * FROM crud_library`;
 
-	    res.render('booktable', {
-		
-		crudLibraryMembers: crud_library_results.rows
-	    })
-	    console.log('Content-Type: ' + res.get('Content-Type'))
-	
-	})
-});
+	if (searchTerm != undefined && searchParam != undefined) {
+		query = `SELECT * FROM crud_library WHERE ${searchParam} = '${searchTerm}'`;
+	}
+	if (searchTerm == '')
+	{
+		query = `SELECT * FROM crud_library`;
+	}
 
-// SELECT * FROM crud_library WHERE '${req.params.search_param}' = '${req.params.searchEntry}
-/*
-// Booktable Page - Read Search
-app.get('/booktable', function(req, res){
-	console.log("searchBar")
-	console.log(`${req.query.search_param}`)
-	console.log(`${req.query.searchEntry}`)
-	console.log(`${req.query.searchEntry}` == 'undefined')
-	//if (`${req.query.searchEntry}` == 'undefined') {location.reload()}
-	var searchTerm = `${req.query.searchEntry}`
-	console.log(searchTerm)
-	pool.query(`SELECT * FROM crud_library WHERE '${req.query.search_param}' = 'Harry Potter'`, (err, crud_library_results) => {
-	    console.log(err, crud_library_results)
-		 
+	pool.query(query, (err, crud_library_results) => {
+		console.log(err, crud_library_results)
+
 		res.render('booktable', {
+
 		crudLibraryMembers: crud_library_results.rows
 		})
 		console.log('Content-Type: ' + res.get('Content-Type'))
-		
-		//res.send('id: ' + req.query.id);
 	})
-});
-*/
-app.get('/booktable', function(req, res){
-	console.log("searchBar on second")
-	console.log(`${req.params.searchBar}`)
-	console.log(`${req.params.searchBar}` == 'undefined')
 });
 
 // Booktable Page - Update
