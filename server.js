@@ -226,11 +226,11 @@ app.get('/booktable', function(req, res){
 	var query = `SELECT * FROM crud_library`;
 
 	if (searchTerm != undefined && searchParam != undefined) {
-		query = `SELECT * FROM crud_library WHERE ${searchParam} LIKE '%${searchTerm}%'`;
+		query = `SELECT * FROM crud_library WHERE ${searchParam} LIKE '%${searchTerm}%' ORDER BY ${searchParam}`;
 	}
 	if (searchTerm == '')
 	{
-		query = `SELECT * FROM crud_library`;
+		query = `SELECT * FROM crud_library ORDER BY ${searchParam}`;
 	}
 
 	pool.query(query, (err, crud_library_results) => {
