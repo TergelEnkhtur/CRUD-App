@@ -95,13 +95,13 @@ app.get('/login', function(req, res){
 app.get('/login', function(req, res){
 
     res.render('login.pug', { title: 'login  here' });
-	
+	/*
 	if (!req.session.loggedin){
 
 		// in case they are not logged in
 		res.send('Please login to view this page!');
 	}
-	
+	*/
 	res.end();
 });
 
@@ -110,12 +110,12 @@ app.post('/login', function(req, res) {
 	//grabbing the input from the fields
 	let username = req.body.username;
 	let password = req.body.password;
+	var link = '/logged_in_homepage';
 	console.log(req.body)
 
 	//moves foward if the fields are not empty
 	if (username && password) {
 		//makes a SQL query that retrieves username and password from DB
-		//pool.query("SELECT * FROM crud_user WHERE username = ? AND password = ? AND userrole = 'admin'", [username, password], function(error, results, fields) {
 		pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
 			//now that we retrieved the accounts from the crud_user table
 			console.log(results)
@@ -129,6 +129,31 @@ app.post('/login', function(req, res) {
 				// req.session.loggedin = true;
 				// req.session.username = username;
 				// redirects to the book table
+				//console.log("Helloooooooooooooooooooo")
+				/*
+				pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND userrole = 'patron'`, function(err, results2, fields) {
+					console.log(results2)
+					console.log('Username')
+					console.log(username)
+					if (err) throw err;
+					if (results2.rowCount > 0) {
+						console.log('Yes1')
+						link = '/user_logged_in_homepage';
+					} else {
+						console.log('No1')
+						link = '/logged_in_homepage';
+					}
+				});
+				if (link == '/user_logged_in_homepage'){
+					console.log('Yes2')
+					res.redirect('/user_logged_in_homepage')
+				} else {
+					console.log('No2')
+					res.redirect('/logged_in_homepage')
+				}
+				console.log('LINK')
+				console.log(link)
+				*/
 				res.redirect('/user_logged_in_homepage');
 			} else {
 				// res.send('Incorrect Credentials.');
@@ -142,18 +167,32 @@ app.post('/login', function(req, res) {
 	}
 }); 
 
-app.get('/user_logged_in_homepage', function(req, res){
+app.get('/logged_in_homepage', function(req, res){
 
-    res.render('user_logged_in_homepage.pug', { title: 'login  here' });
-	
+    res.render('logged_in_homepage.pug', { title: 'login  here' });
+	/*
 	if (!req.session.loggedin){
 
 		// in case they are not logged in
 		res.send('Please login to view this page!');
 	}
-	
+	*/
 	res.end();
 });
+
+app.get('/user_logged_in_homepage', function(req, res){
+
+    res.render('user_logged_in_homepage.pug', { title: 'login  here' });
+	/*
+	if (!req.session.loggedin){
+
+		// in case they are not logged in
+		res.send('Please login to view this page!');
+	}
+	*/
+	res.end();
+});
+
 
 // crud_user
 // Usertable Page - Read
@@ -209,6 +248,14 @@ app.delete('/usertable/:id', (req, res) => {
 })
 
 // crud_library
+// Booktable Page - Patron
+app.get('/booktable_patron', function(req, res){
+
+    res.render('booktable_patron.pug');
+	
+	res.end();
+});
+
 // Booktable Page - Create
 app.post('/booktable', (req, res) => {
 	pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
