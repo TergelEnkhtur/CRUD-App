@@ -82,14 +82,54 @@ app.get('/register', function(req, res){
 	})
   res.render('register.pug', { title: 'Sign up here' });
 });
-/*
-// Login Page - Get Login Pug Page
-app.get('/login', function(req, res){
 
-    res.render('login.pug', { title: 'login  here' });
-	
+app.get('/login_patron', function(req, res){
+
+    res.render('login_patron.pug', { title: 'login  here' });
+	/*
+	if (!req.session.loggedin){
+
+		// in case they are not logged in
+		res.send('Please login to view this page!');
+	}
+	*/
+	res.end();
 });
-*/
+
+app.post('/login_patron', function(req, res) {
+	//grabbing the input from the fields
+	let username = req.body.username;
+	let password = req.body.password;
+	console.log(req.body)
+
+	//moves foward if the fields are not empty
+	if (username && password) {
+		//makes a SQL query that retrieves username and password from DB
+		pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND password = '${password}' AND userrole = 'patron'`, function(error, results, fields) {
+			//now that we retrieved the accounts from the crud_user table
+			console.log(results)
+			//prints the error if there is one
+			if (error) throw error;
+
+			//if the account exists
+			if (results.rowCount > 0) {
+				//this throws a boolean flag that makes a loggedin session true or not which shows whether
+				//someone is allowed to view something.
+				// req.session.loggedin = true;
+				// req.session.username = username;
+				// redirects to the book table
+				res.redirect('/user_logged_in_homepage');
+			} else {
+				// res.send('Incorrect Credentials.');
+				res.render('login_patron.pug', { title: 'login  here', error: 'Incorrect Credentials.'});
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter a Username and Password!');
+		res.end();
+	}
+}); 
 
 // Beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
 app.get('/login', function(req, res){
@@ -110,13 +150,12 @@ app.post('/login', function(req, res) {
 	//grabbing the input from the fields
 	let username = req.body.username;
 	let password = req.body.password;
-	var link = '/logged_in_homepage';
 	console.log(req.body)
 
 	//moves foward if the fields are not empty
 	if (username && password) {
 		//makes a SQL query that retrieves username and password from DB
-		pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
+		pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND password = '${password}' AND userrole = 'librarian'`, function(error, results, fields) {
 			//now that we retrieved the accounts from the crud_user table
 			console.log(results)
 			//prints the error if there is one
@@ -130,31 +169,7 @@ app.post('/login', function(req, res) {
 				// req.session.username = username;
 				// redirects to the book table
 				//console.log("Helloooooooooooooooooooo")
-				/*
-				pool.query(`SELECT * FROM crud_user WHERE username = '${username}' AND userrole = 'patron'`, function(err, results2, fields) {
-					console.log(results2)
-					console.log('Username')
-					console.log(username)
-					if (err) throw err;
-					if (results2.rowCount > 0) {
-						console.log('Yes1')
-						link = '/user_logged_in_homepage';
-					} else {
-						console.log('No1')
-						link = '/logged_in_homepage';
-					}
-				});
-				if (link == '/user_logged_in_homepage'){
-					console.log('Yes2')
-					res.redirect('/user_logged_in_homepage')
-				} else {
-					console.log('No2')
-					res.redirect('/logged_in_homepage')
-				}
-				console.log('LINK')
-				console.log(link)
-				*/
-				res.redirect('/user_logged_in_homepage');
+				res.redirect('/logged_in_homepage');
 			} else {
 				// res.send('Incorrect Credentials.');
 				res.render('login.pug', { title: 'login  here', error: 'Incorrect Credentials.'});

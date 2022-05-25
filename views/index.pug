@@ -13,11 +13,19 @@ html(lang='en')
       .row.justify-content-center
         .col.align-self-center
           .card.p-3.text-center
-            h5.card-title Library Account Holders
+            h5.card-title Library Patrons
             p.card-text
-              | Check out books 
+              | Search for Books 
               br
-              |  Check if you have any fines remaining
+              |  Check out Books
+            a.btn.btn-primary(href='/login_patron') Sign In
+        .col.align-self-center
+          .card.p-3.text-center
+            h5.card-title Librarians
+            p.card-text
+              | Manage Books 
+              br
+              |  Manage Patron
             a.btn.btn-primary(href='/login') Sign In
         .col.align-self-center
           .card.p-3.text-center
