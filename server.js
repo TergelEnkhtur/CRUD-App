@@ -208,6 +208,22 @@ app.get('/user_logged_in_homepage', function(req, res){
 	res.end();
 });
 
+// crud_rented_books
+// Rented Books Page - Read
+app.get('/rented_books', function(req, res){
+	console.log('Accept: ' + req.get('Accept'))
+	
+	pool.query('SELECT * FROM crud_rented_books', (err, crud_rented_books_results) => {
+	    console.log(err, crud_rented_books_results)
+
+	    res.render('rented_books', {
+		
+		crudRentedBooks: crud_rented_books_results.rows
+	    })
+	    console.log('Content-Type: ' + res.get('Content-Type'))
+	
+	})
+});
 
 // crud_user
 // Usertable Page - Read
