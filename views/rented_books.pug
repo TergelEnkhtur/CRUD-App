@@ -31,9 +31,16 @@ html(lang='en')
         .container
           .row
             .col-xs-8.col-xs-offset-2
-              form#searchForm.input-group.mb-3(action='#' method='get')
-                label(for='userSearch') Search Rented Book
-                input.form-control.mx-3.mb-3(type='text' name='x' placeholder='Search term...')
+              form#searchForm.input-group.mb-3(action='/rented_books' method='get')
+                .input-group-btn.search-panel
+                  select#search_param2.btn.btn-default.dropdown-toggle(name='search_param2' data-toggle='dropdown')
+                    option(value='fullname') Search By Full Name
+                    option(value='username') Search By Username
+                    option(value='book_title') Search By Book Title
+                    option(value='author_name') Search By Author Name
+                    option(value='genre') Search By Genre
+                    option(value='isbn') Search By ISBN #
+                input.form-control.mx-3.mb-3(type='text' name='searchTerm2' placeholder='Search term...')
                 span.input-group-btn
                   button.btn.btn-outline-dark(type='submit')
                     svg.bi.bi-search(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16')

@@ -216,6 +216,7 @@ app.get('/user_logged_in_homepage', function(req, res){
 });
 
 // crud_reservations
+/*
 // Book Reservations Page - Read
 app.get('/rented_books', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
@@ -229,6 +230,31 @@ app.get('/rented_books', function(req, res){
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
+	})
+});
+*/
+// Usertable Page - Read
+app.get('/rented_books', function(req, res){
+	var searchTerm2 = req.query.searchTerm2;
+	var searchParam2 = req.query.search_param2;
+	var query = `SELECT * FROM crud_reservations r INNER JOIN crud_library l ON r.book_id = l.id INNER JOIN crud_user u ON r.user_id = u.id`;
+
+	if (searchTerm2 != undefined && searchParam2 != undefined) {
+		query = `SELECT * FROM crud_reservations r INNER JOIN crud_library l ON r.book_id = l.id INNER JOIN crud_user u ON r.user_id = u.id WHERE ${searchParam2} LIKE '%${searchTerm2}%' ORDER BY ${searchParam2}`;
+	}
+	if (searchTerm2 == '')
+	{
+		query = `SELECT * FROM crud_reservations r INNER JOIN crud_library l ON r.book_id = l.id INNER JOIN crud_user u ON r.user_id = u.id ORDER BY ${searchParam2}`;
+	}
+
+	pool.query(query, (err, crud_reservations_results) => {
+		console.log(err, crud_reservations_results)
+
+		res.render('rented_books', {
+
+		crudRentedBooks: crud_reservations_results.rows
+		})
+		console.log('Content-Type: ' + res.get('Content-Type'))
 	})
 });
 
