@@ -31,6 +31,8 @@ app.use(session({
 const Pool = require('pg').Pool
 
 var connectionParams = null;
+
+/* istanbul ignore if	*/
 if (process.env.DATABASE_URL != null) {
     connectionParams = {
 	connectionString: process.env.DATABASE_URL,
@@ -225,6 +227,39 @@ app.get('/rented_books', function(req, res){
 	})
 });
 
+// Rented Books Page - Create
+app.delete('/rented_books/:id', (req, res) => {
+
+	const id = req.params["id"]
+	const book_title = req.params["book_title"]
+	const author_name = req.params["author_name"]
+	const genre = req.params["genre"]
+	const isbn = req.params["isbn"]
+  
+	console.log(id)
+	console.log(book_title)
+
+	pool.query(`INSERT INTO crud_rented_books WHERE id = ${id}, book_title = ${book_title}, author_name = ${author_name}, genre = ${genre}, isbn = ${isbn}`, (err, result) => {
+	  console.log(err)
+	  
+	  res.redirect('/rented_books')
+	})
+})
+
+// Rented Books Page - Delete
+app.delete('/rented_books/:id', (req, res) => {
+
+	const id = req.params["id"]
+  
+	console.log(id)
+  
+	pool.query(`DELETE FROM crud_rented_books WHERE id = ${id}`, (err, result) => {
+	  console.log(err)
+	  
+	  res.redirect('/rented_books')
+	})
+})
+
 // crud_user
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
@@ -281,10 +316,27 @@ app.delete('/usertable/:id', (req, res) => {
 // crud_library
 // Booktable Page - Patron
 app.get('/booktable_patron', function(req, res){
+	var searchTerm = req.query.searchTerm;
+	var searchParam = req.query.search_param;
+	var query = `SELECT * FROM crud_library`;
 
-    res.render('booktable_patron.pug');
-	
-	res.end();
+	if (searchTerm != undefined && searchParam != undefined) {
+		query = `SELECT * FROM crud_library WHERE ${searchParam} LIKE '%${searchTerm}%' ORDER BY ${searchParam}`;
+	}
+	if (searchTerm == '')
+	{
+		query = `SELECT * FROM crud_library ORDER BY ${searchParam}`;
+	}
+
+	pool.query(query, (err, crud_library_results) => {
+		console.log(err, crud_library_results)
+
+		res.render('booktable_patron', {
+
+		crudLibraryMembers: crud_library_results.rows
+		})
+		console.log('Content-Type: ' + res.get('Content-Type'))
+	})
 });
 
 // Booktable Page - Create

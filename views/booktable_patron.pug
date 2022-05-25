@@ -1,4 +1,21 @@
 doctype html
+
+script.
+  const createRecord = function(crud_rented_books_id) {
+    var url = "/rented_books/" + crud_rented_books_id
+    fetch(url, {
+        method: 'INSERT',
+        body: JSON.stringify({
+            _method: 'INSERT'
+        })
+    })
+    .then((response) => {
+        console.log('reload')
+        location.reload() // Reloads the current page
+    })
+  }
+
+
 html(lang='en')
   head
     // Required meta tags
@@ -15,14 +32,15 @@ html(lang='en')
         .container
           .row
             .col-xs-8.col-xs-offset-2
-              form#searchForm.input-group.mb-3(action='#', method='get')
+              form#searchForm.input-group.mb-3(action='/booktable_patron', method='get')
                 .input-group-btn.search-panel
                   select#search_param.btn.btn-default.dropdown-toggle(name='search_param', data-toggle='dropdown')
-                    option(value='title') Book Title
-                    option(value='isbn') ISBN #
-                    option(value='author') Author
+                    option(value='book_title') Book Title
+                    option(value='author_name') Author
                     option(value='genre') Genre
-                input.form-control.mx-3.mb-3(type='text', name='x', placeholder='Search term...')
+                    option(value='isbn') ISBN #
+                    option(value='books_available') Books Available
+                input.form-control.mx-3.mb-3(type='text', name='searchTerm', placeholder='Search term...')
                 span.input-group-btn
                   button.btn.btn-outline-dark(type='submit')
                     svg.bi.bi-search(xmlns='http://www.w3.org/2000/svg', width='16', height='16', fill='currentColor', viewBox='0 0 16 16')
@@ -40,15 +58,16 @@ html(lang='en')
             th(scope='col') Books Available
             th(scope='col')
         tbody
-          tr
-            td#row1(scope='row') 1
-            td Hello World!
-            td John Doe
-            td Fiction
-            td 978-3-16-148410-0
-            td 5
-            td
-              button.btn.btn-success Checkout this book
+          each crudLibraryMember in crudLibraryMembers
+            tr
+              td #{crudLibraryMember.id}
+              td #{crudLibraryMember.book_title}
+              td #{crudLibraryMember.author_name}
+              td #{crudLibraryMember.genre}
+              td #{crudLibraryMember.isbn}
+              td #{crudLibraryMember.books_available}
+              td
+                button(onclick=`createRecord(${crudLibraryMember.id})`) Checkout this book
       a.btn.btn-secondary(href='/')
         svg.bi.bi-house(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16')
           path(fill-rule='evenodd' d='M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z')
