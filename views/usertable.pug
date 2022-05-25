@@ -51,6 +51,7 @@ html(lang='en')
             th(scope='col') Full Name
             th(scope='col') Username
             th(scope='col') Password
+            th(scope='col') Userrole
             th(scope='col') Edit/Delete
         tbody
           each crudUserMember in crudUserMembers
@@ -59,6 +60,7 @@ html(lang='en')
               td #{crudUserMember.fullname}
               td #{crudUserMember.username}
               td #{crudUserMember.password}
+              td #{crudUserMember.userrole}
               td 
                 a(href='/usertable/' + crudUserMember.id)
                   svg.bi.bi-pencil-square(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16')
