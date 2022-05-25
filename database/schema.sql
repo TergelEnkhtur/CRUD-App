@@ -87,12 +87,47 @@ CREATE SEQUENCE public.crud_rented_books_id_seq
 
 
 ALTER TABLE public.crud_rented_books_id_seq OWNER TO api_user;
-    
+
 --
 -- Name: crud_rented_books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
 --
 
 ALTER SEQUENCE public.crud_rented_books_id_seq OWNED BY public.crud_rented_books.id;
+
+
+--
+-- Name: crud_reservations; Type: TABLE; Schema: public; Owner: api_user
+--
+
+CREATE TABLE public.crud_reservations (
+    id integer NOT NULL,
+    book_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.crud_reservations OWNER TO api_user;
+
+--
+-- Name: crud_reservations_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
+--
+
+CREATE SEQUENCE public.crud_reservations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.crud_reservations_id_seq OWNER TO api_user;
+
+--
+-- Name: crud_reservations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
+--
+
+ALTER SEQUENCE public.crud_reservations_id_seq OWNED BY public.crud_reservations.id;
 
 
 --
@@ -149,6 +184,13 @@ ALTER TABLE ONLY public.crud_rented_books ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: crud_reservations id; Type: DEFAULT; Schema: public; Owner: api_user
+--
+
+ALTER TABLE ONLY public.crud_reservations ALTER COLUMN id SET DEFAULT nextval('public.crud_reservations_id_seq'::regclass);
+
+
+--
 -- Name: crud_user id; Type: DEFAULT; Schema: public; Owner: api_user
 --
 
@@ -172,6 +214,17 @@ COPY public.crud_library (id, book_title, author_name, genre, isbn, books_availa
 
 COPY public.crud_rented_books (id, book_title, author_name, genre, isbn) FROM stdin;
 1	Harry Potter	J.K. Rowling	Adventure	978-1-501111-10-9
+\.
+
+
+--
+-- Data for Name: crud_reservations; Type: TABLE DATA; Schema: public; Owner: api_user
+--
+
+COPY public.crud_reservations (id, book_id, user_id) FROM stdin;
+1	20	8
+2	20	8
+3	10	8
 \.
 
 
@@ -202,6 +255,13 @@ SELECT pg_catalog.setval('public.crud_rented_books_id_seq', 1, true);
 
 
 --
+-- Name: crud_reservations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
+--
+
+SELECT pg_catalog.setval('public.crud_reservations_id_seq', 3, true);
+
+
+--
 -- Name: crud_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
@@ -226,12 +286,36 @@ ALTER TABLE ONLY public.crud_rented_books
 
 
 --
+-- Name: crud_reservations crud_reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: api_user
+--
+
+ALTER TABLE ONLY public.crud_reservations
+    ADD CONSTRAINT crud_reservations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: crud_user crud_user_pkey; Type: CONSTRAINT; Schema: public; Owner: api_user
 --
 
 ALTER TABLE ONLY public.crud_user
     ADD CONSTRAINT crud_user_pkey PRIMARY KEY (id);
 
+
+
+--
+-- Name: crud_reservations fk_library; Type: FK CONSTRAINT; Schema: public; Owner: api_user
+--
+
+ALTER TABLE ONLY public.crud_reservations
+    ADD CONSTRAINT fk_library FOREIGN KEY (book_id) REFERENCES public.crud_library(id);
+
+
+--
+-- Name: crud_reservations fk_user; Type: FK CONSTRAINT; Schema: public; Owner: api_user
+--
+
+ALTER TABLE ONLY public.crud_reservations
+    ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES public.crud_user(id);
 
 
 --
