@@ -283,7 +283,7 @@ app.get('/usertable', function(req, res){
 
 		res.render('usertable', {
 
-		crudLibraryMembers: crud_user_results.rows
+		crudUserMembers: crud_user_results.rows
 		})
 		console.log('Content-Type: ' + res.get('Content-Type'))
 	})
