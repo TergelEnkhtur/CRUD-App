@@ -1,0 +1,33 @@
+2022-05-08 17:35:59.035 CDT [1498] LOG:  starting PostgreSQL 14.2 on x86_64-apple-darwin21.3.0, compiled by Apple clang version 13.0.0 (clang-1300.0.29.30), 64-bit
+2022-05-08 17:35:59.037 CDT [1498] LOG:  listening on IPv6 address "::1", port 5432
+2022-05-08 17:35:59.037 CDT [1498] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-05-08 17:35:59.038 CDT [1498] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2022-05-08 17:35:59.058 CDT [1499] LOG:  database system was shut down at 2022-05-08 17:33:01 CDT
+2022-05-08 17:35:59.067 CDT [1498] LOG:  database system is ready to accept connections
+2022-05-08 17:57:36.103 CDT [2474] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 17:57:36.103 CDT [2474] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:11:58.107 CDT [2867] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 18:11:58.107 CDT [2867] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:12:22.289 CDT [2883] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 18:12:22.289 CDT [2883] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:12:22.326 CDT [2884] ERROR:  relation "crud_library" does not exist at character 13
+2022-05-08 18:12:22.326 CDT [2884] STATEMENT:  INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('undefined', 'undefined', 'undefined', 'undefined', 'undefined')
+2022-05-08 18:12:22.335 CDT [2885] ERROR:  relation "crud_library" does not exist at character 13
+2022-05-08 18:12:22.335 CDT [2885] STATEMENT:  INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('undefined', 'undefined', 'undefined', 'undefined', 'undefined')
+2022-05-08 18:12:59.953 CDT [2904] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 18:12:59.953 CDT [2904] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:12:59.984 CDT [2905] ERROR:  relation "crud_library" does not exist at character 13
+2022-05-08 18:12:59.984 CDT [2905] STATEMENT:  INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('undefined', 'undefined', 'undefined', 'undefined', 'undefined')
+2022-05-08 18:25:32.168 CDT [3266] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 18:25:32.168 CDT [3266] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:25:32.199 CDT [3267] ERROR:  relation "crud_library" does not exist at character 13
+2022-05-08 18:25:32.199 CDT [3267] STATEMENT:  INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('undefined', 'undefined', 'undefined', 'undefined', 'undefined')
+2022-05-08 18:26:22.069 CDT [3287] ERROR:  relation "crud_library" does not exist at character 15
+2022-05-08 18:26:22.069 CDT [3287] STATEMENT:  SELECT * FROM crud_library
+2022-05-08 18:26:22.099 CDT [3288] ERROR:  relation "crud_library" does not exist at character 13
+2022-05-08 18:26:22.099 CDT [3288] STATEMENT:  INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('undefined', 'undefined', 'undefined', 'undefined', 'undefined')
+2022-05-08 18:58:21.336 CDT [1498] LOG:  received fast shutdown request
+2022-05-08 18:58:21.336 CDT [1498] LOG:  aborting any active transactions
+2022-05-08 18:58:21.339 CDT [1498] LOG:  background worker "logical replication launcher" (PID 1505) exited with exit code 1
+2022-05-08 18:58:21.339 CDT [1500] LOG:  shutting down
+2022-05-08 18:58:21.356 CDT [1498] LOG:  database system is shut down

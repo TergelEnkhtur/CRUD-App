@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "local": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha && nyc report --reporter=html"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
     "supertest": "^6.2.3"
   }
 }
