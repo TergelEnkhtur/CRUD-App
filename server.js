@@ -266,16 +266,16 @@ app.delete('/rented_books/:id', (req, res) => {
 // crud_user
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
-	var searchTerm = req.query.searchTerm;
-	var searchParam = req.query.search_param;
+	var searchTerm2 = req.query.searchTerm2;
+	var searchParam2 = req.query.search_param2;
 	var query = `SELECT * FROM crud_user`;
 
-	if (searchTerm != undefined && searchParam != undefined) {
-		query = `SELECT * FROM crud_user WHERE ${searchParam} LIKE '%${searchTerm}%' ORDER BY ${searchParam}`;
+	if (searchTerm2 != undefined && searchParam2 != undefined) {
+		query = `SELECT * FROM crud_user WHERE ${searchParam2} LIKE '%${searchTerm2}%' ORDER BY ${searchParam2}`;
 	}
-	if (searchTerm == '')
+	if (searchTerm2 == '')
 	{
-		query = `SELECT * FROM crud_user ORDER BY ${searchParam}`;
+		query = `SELECT * FROM crud_user ORDER BY ${searchParam2}`;
 	}
 
 	pool.query(query, (err, crud_user_results) => {
