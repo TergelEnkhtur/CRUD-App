@@ -3,6 +3,9 @@ const express = require('express')
 // const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser');
+
+const cookieParser = require('cookie-parser');
+
 const port = process.env.PORT || 3000
 
 const path = require('path');
@@ -12,6 +15,7 @@ app.set("view engine", "pug")
 
 // for parsing application/json
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -120,6 +124,7 @@ app.post('/login_patron', function(req, res) {
 				// req.session.loggedin = true;
 				// req.session.username = username;
 				// redirects to the book table
+				res.cookie('user_id',results.rows[0].id)
 				res.redirect('/user_logged_in_homepage');
 			} else {
 				// res.send('Incorrect Credentials.');
@@ -210,50 +215,48 @@ app.get('/user_logged_in_homepage', function(req, res){
 	res.end();
 });
 
-// crud_rented_books
-// Rented Books Page - Read
+// crud_reservations
+// Book Reservations Page - Read
 app.get('/rented_books', function(req, res){
 	console.log('Accept: ' + req.get('Accept'))
 	
-	pool.query('SELECT * FROM crud_rented_books', (err, crud_rented_books_results) => {
-	    console.log(err, crud_rented_books_results)
+	pool.query(`SELECT * FROM crud_reservations r INNER JOIN crud_library l ON r.book_id = l.id INNER JOIN crud_user u ON r.user_id = u.id`, (err, crud_reservations_results) => {
+	    console.log(err, crud_reservations_results)
 
 	    res.render('rented_books', {
 		
-		crudRentedBooks: crud_rented_books_results.rows
+		crudRentedBooks: crud_reservations_results.rows
 	    })
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	
 	})
 });
 
-// Rented Books Page - Create
-app.delete('/rented_books/:id', (req, res) => {
+// Book Reservations Page - Create
+app.post('/rented_books/:id', (req, res) => {
 
-	const id = req.params["id"]
-	const book_title = req.params["book_title"]
-	const author_name = req.params["author_name"]
-	const genre = req.params["genre"]
-	const isbn = req.params["isbn"]
-  
-	console.log(id)
-	console.log(book_title)
+	console.log(req.cookies)
+	const bookid = req.params["id"]
+	const userid = req.cookies['user_id']
 
-	pool.query(`INSERT INTO crud_rented_books WHERE id = ${id}, book_title = ${book_title}, author_name = ${author_name}, genre = ${genre}, isbn = ${isbn}`, (err, result) => {
+	console.log(bookid)
+	console.log(userid)
+	
+	pool.query(`INSERT INTO crud_reservations (book_id, user_id) VALUES (${bookid}, ${userid})`, (err, result) => {
 	  console.log(err)
 	  
 	  res.redirect('/rented_books')
 	})
 })
 
-// Rented Books Page - Delete
+// Book Reservations Page - Delete
 app.delete('/rented_books/:id', (req, res) => {
 
 	const id = req.params["id"]
   
 	console.log(id)
   
-	pool.query(`DELETE FROM crud_rented_books WHERE id = ${id}`, (err, result) => {
+	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
 	  console.log(err)
 	  
 	  res.redirect('/rented_books')
@@ -263,17 +266,26 @@ app.delete('/rented_books/:id', (req, res) => {
 // crud_user
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
-	console.log('Accept: ' + req.get('Accept'))
-	
-	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
-	    console.log(err, crud_user_results)
+	var searchTerm = req.query.searchTerm;
+	var searchParam = req.query.search_param;
+	var query = `SELECT * FROM crud_user`;
 
-	    res.render('usertable', {
-		
-		crudUserMembers: crud_user_results.rows
-	    })
-	    console.log('Content-Type: ' + res.get('Content-Type'))
-	
+	if (searchTerm != undefined && searchParam != undefined) {
+		query = `SELECT * FROM crud_user WHERE ${searchParam} LIKE '%${searchTerm}%' ORDER BY ${searchParam}`;
+	}
+	if (searchTerm == '')
+	{
+		query = `SELECT * FROM crud_user ORDER BY ${searchParam}`;
+	}
+
+	pool.query(query, (err, crud_user_results) => {
+		console.log(err, crud_user_results)
+
+		res.render('usertable', {
+
+		crudLibraryMembers: crud_user_results.rows
+		})
+		console.log('Content-Type: ' + res.get('Content-Type'))
 	})
 });
 
@@ -338,6 +350,16 @@ app.get('/booktable_patron', function(req, res){
 		console.log('Content-Type: ' + res.get('Content-Type'))
 	})
 });
+
+// Booktable Page - Create FIX THIS
+app.post('/booktable_patron', (req, res) => {
+	pool.query(`INSERT INTO crud_library (book_title, author_name, genre, isbn, books_available) VALUES ('${req.body.book_title}', '${req.body.author_name}', '${req.body.genre}', '${req.body.isbn}', '${req.body.books_available}')`, (err, results) => {
+
+		console.log(err, results)
+	
+		res.redirect('/booktable_patron')
+	})
+})
 
 // Booktable Page - Create
 app.post('/booktable', (req, res) => {

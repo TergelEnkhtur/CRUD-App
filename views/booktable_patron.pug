@@ -4,9 +4,9 @@ script.
   const createRecord = function(crud_rented_books_id) {
     var url = "/rented_books/" + crud_rented_books_id
     fetch(url, {
-        method: 'INSERT',
+        method: 'POST',
         body: JSON.stringify({
-            _method: 'INSERT'
+            _method: 'POST'
         })
     })
     .then((response) => {
