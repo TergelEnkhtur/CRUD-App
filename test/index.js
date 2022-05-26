@@ -21,8 +21,24 @@ describe('The express server', function () {
             .get('/')
             .expect('Content-Type',/html/)
             .expect(200, function(err,res) {
+                //console.log(res.status);
                 if (err) {return done (err);}
 
+                done();
+            });
+    });
+
+    //Test #1.2 - Render HTML for the register path
+    it('should render html for the register path', function (done) {
+
+        request(server)
+            .get('/register')
+            .expect('Content-Type',/html/)
+            .expect(200, function(err,res) {
+                console.log(res.statusCode);
+                if (err) {return done (err);}
+
+                console.log(res.status);
                 done();
             });
     });
