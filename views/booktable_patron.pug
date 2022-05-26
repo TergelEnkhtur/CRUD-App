@@ -4,9 +4,9 @@ script.
   const createRecord = function(crud_rented_books_id) {
     var url = "/rented_books/" + crud_rented_books_id
     fetch(url, {
-        method: 'INSERT',
+        method: 'POST',
         body: JSON.stringify({
-            _method: 'INSERT'
+            _method: 'POST'
         })
     })
     .then((response) => {
@@ -35,10 +35,10 @@ html(lang='en')
               form#searchForm.input-group.mb-3(action='/booktable_patron', method='get')
                 .input-group-btn.search-panel
                   select#search_param.btn.btn-default.dropdown-toggle(name='search_param', data-toggle='dropdown')
-                    option(value='book_title') Book Title
-                    option(value='author_name') Author
-                    option(value='genre') Genre
-                    option(value='isbn') ISBN #
+                    option(value='book_title') Search By Book Title
+                    option(value='author_name') Search By Author Name
+                    option(value='genre') Search By Genre
+                    option(value='isbn') Search By ISBN #
                     option(value='books_available') Books Available
                 input.form-control.mx-3.mb-3(type='text', name='searchTerm', placeholder='Search term...')
                 span.input-group-btn
