@@ -28,22 +28,21 @@ describe('The express server', function () {
             });
     });
 
-    //Test #1.2 - Render HTML for the register path
+    //Test #2 - Render HTML for the register path
     it('should render html for the register path', function (done) {
 
         request(server)
             .get('/register')
             .expect('Content-Type',/html/)
             .expect(200, function(err,res) {
-                console.log(res.statusCode);
+
                 if (err) {return done (err);}
 
-                console.log(res.status);
                 done();
             });
     });
 
-    //Test #2 - Not Respond to PUT requests for the root path
+    //Test #3 - Not Respond to PUT requests for the root path
     it('should not respond to PUT requests for the root path',
         
         function(done) {
@@ -57,7 +56,7 @@ describe('The express server', function () {
                 });
         });
 
-    //Test #3 - Responding to nonexistent POST requests for the root path with any error
+    //Test #4 - Responding to nonexistent POST requests for the root path with any error
     it('should respond to nonexistent POST requests for the root path, with any error',
         
         function(done) {
