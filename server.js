@@ -64,12 +64,12 @@ app.get('/', (req, res) => {
     res.render('index.pug', { title: 'home page' });
 });
 
-// Register Page - Create
+// Register Page - Post
 app.post('/register', (req, res) => {
 
     pool.query(`INSERT INTO crud_user (fullname, username, password, repassword, userrole) VALUES ('${req.body.fullname}', '${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'patron')`, (err, results) => {
 
-    console.log(err, results)
+    //console.log(err, results)
 
     res.redirect('/')
     })
@@ -77,14 +77,14 @@ app.post('/register', (req, res) => {
 
 // Register Page - Create
 app.get('/register', function(req, res){
-    console.log('Accept: ' + req.get('Accept'))
+    //console.log('Accept: ' + req.get('Accept'))
     	
 	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
-	    console.log(err, crud_user_results)
+	    //console.log(err, crud_user_results)
 													    
 	    res.render('register')
 
-	    console.log('Content-Type: ' + res.get('Content-Type'))
+	    //.log('Content-Type: ' + res.get('Content-Type'))
 	})
 
 });

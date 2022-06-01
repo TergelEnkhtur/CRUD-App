@@ -28,8 +28,8 @@ describe('The express server', function () {
             });
     });
 
-    //Test #2 - Render HTML for the register path
-    it('should render html for the register path', function (done) {
+    //Test #2 - Render HTML for the register GET path
+    it('should render html for the register GET path', function (done) {
 
         request(server)
             .get('/register')
@@ -42,7 +42,21 @@ describe('The express server', function () {
             });
     });
 
-    //Test #3 - Not Respond to PUT requests for the root path
+     //Test #3 - Render Plain Text for the register POST path
+     it('should render plain text for the register POST path', function (done) {
+
+        request(server)
+            .post('/register')
+            .expect('Content-Type',"text/plain; charset=utf-8")
+            .expect(302, function(err,res) {
+
+                if (err) {return done (err);}
+
+                done();
+            });
+    });
+
+    //Test #4 - Not Respond to PUT requests for the root path
     it('should not respond to PUT requests for the root path',
         
         function(done) {
@@ -56,7 +70,7 @@ describe('The express server', function () {
                 });
         });
 
-    //Test #4 - Responding to nonexistent POST requests for the root path with any error
+    //Test #5 - Responding to nonexistent POST requests for the root path with any error
     it('should respond to nonexistent POST requests for the root path, with any error',
         
         function(done) {
