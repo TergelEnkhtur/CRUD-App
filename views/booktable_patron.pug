@@ -1,8 +1,8 @@
 doctype html
 
 script.
-  const createRecord = function(crud_rented_books_id) {
-    var url = "/rented_books/" + crud_rented_books_id
+  const createRecord = function(crud_reservations_id) {
+    var url = "/rented_books/" + crud_reservations_id
     fetch(url, {
         method: 'POST',
         body: JSON.stringify({

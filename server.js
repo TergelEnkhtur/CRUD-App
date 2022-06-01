@@ -288,19 +288,19 @@ app.post('/rented_books/:id', (req, res) => {
 })
 
 
-// Book Reservations Page - Delete
-app.delete('/rented_books/:id', (req, res) => {
+// // Book Reservations Page - Delete
+// app.delete('/rented_books/:id', (req, res) => {
 
-	const id = req.params["id"]
+// 	const id = req.params["id"]
   
-	console.log(id)
+// 	console.log(id)
   
-	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
-	  console.log(err)
+// 	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
+// 	  console.log(err)
 	  
-	  res.redirect('/rented_books')
-	})
-})
+// 	  res.redirect('/rented_books')
+// 	})
+// })
 
 // crud_user
 // Usertable Page - Read
