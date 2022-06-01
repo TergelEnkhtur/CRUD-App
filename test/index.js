@@ -95,6 +95,25 @@ describe('The express server', function () {
             });
     });
 
+    //Test #7 - Ensure a Username and Password can be entered by the login_patron POST path
+    //it('should ensure a Username and Password can be entered by the login_patron POST path', function (done) {
+
+        //request(server)
+            //.post('/login_patron')
+            //.send({
+                //"username": "testUsername",
+                //"password": "testPassword"
+            //})
+            //.expect(302, function(err,res) {
+    
+                //if (err) {return done (err);}
+    
+                //done();
+            //});
+    //})
+
+    
+
     after(function(done) {
         app.close(function() {
             done();
