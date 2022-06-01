@@ -191,6 +191,12 @@ app.post('/login', function(req, res) {
 	}
 }); 
 
+app.get('/thanks', function(req, res){
+
+    res.render('thanks.pug');
+	res.end();
+});
+
 app.get('/logged_in_homepage', function(req, res){
 
     res.render('logged_in_homepage.pug', { title: 'login  here' });
@@ -235,7 +241,7 @@ app.get('/rented_books', function(req, res){
 	})
 });
 */
-// Usertable Page - Read
+// Book Reservations Page - Read
 app.get('/rented_books', function(req, res){
 	var searchTerm2 = req.query.searchTerm2;
 	var searchParam2 = req.query.search_param2;
@@ -271,21 +277,6 @@ app.post('/rented_books/:id', (req, res) => {
 	console.log(userid)
 	
 	pool.query(`INSERT INTO crud_reservations (book_id, user_id) VALUES (${bookid}, ${userid})`, (err, result) => {
-	  console.log(err)
-	  
-	  res.redirect('/rented_books')
-	})
-})
-
-
-// Book Reservations Page - Delete
-app.delete('/rented_books/:id/delete', (req, res) => {
-
-	const id = req.params["id"]
-  
-	console.log(id)
-  
-	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
 	  console.log(err)
 	  
 	  res.redirect('/rented_books')
