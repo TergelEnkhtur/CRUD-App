@@ -81,6 +81,20 @@ describe('The express server', function () {
                 .end(done);
         });
 
+    //Test #6 - Render HTML for the login_patron GET path
+    it('should render html for the login_patron GET path', function (done) {
+
+        request(server)
+            .get('/login_patron')
+            .expect('Content-Type',/html/)
+            .expect(200, function(err,res) {
+    
+                if (err) {return done (err);}
+    
+                done();
+            });
+    });
+
     after(function(done) {
         app.close(function() {
             done();
