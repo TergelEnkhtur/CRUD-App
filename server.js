@@ -289,7 +289,7 @@ app.post('/rented_books/:id', (req, res) => {
 
 
 // Book Reservations Page - Delete
-app.delete('/rented_books/:id/delete', (req, res) => {
+app.delete('/rented_books/:id', (req, res) => {
 
 	const id = req.params["id"]
   
