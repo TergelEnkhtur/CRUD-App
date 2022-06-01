@@ -157,8 +157,9 @@ app.get('/login', function(req, res){
 	res.end();
 });
 
-
+// Login Page - POST
 app.post('/login', function(req, res) {
+	
 	//grabbing the input from the fields
 	let username = req.body.username;
 	let password = req.body.password;

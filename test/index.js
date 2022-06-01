@@ -1,11 +1,13 @@
 const server = require('../server');
 const request = require('supertest');
 const expect = require('chai').expect;
-const { UserModel } = require('/database/schema.sql');
 
 describe('The express server', function () {
 
     var app;
+
+    var testUsername = "testUsernameForUnitTesting";
+    var testPassword = "testPasswordForUnitTesting";
 
     before(function(done) {
 
@@ -97,23 +99,23 @@ describe('The express server', function () {
     });
 
     //Test #7 - Ensure a Username and Password can be entered by the login_patron POST path
-    //it('should ensure a Username and Password can be entered by the login_patron POST path', function (done) {
+    it('should ensure a Username and Password can be entered by the login_patron POST path', function (done) {
 
-        //request(server)
-            //.post('/login_patron')
-            //.send({
-                //"username": "testUsername",
-                //"password": "testPassword"
-            //})
-            //.expect(302, function(err,res) {
+        request(server)
+            .post('/login_patron')
+            .send({
+                "username": testUsername,
+                "password": testPassword
+            })
+            .expect(200, function(err,res) {
+               
+                if (err) {return done (err);}
     
-                //if (err) {return done (err);}
-    
-                //done();
-            //});
-    //})
+                done();
+            });
+    })
 
-    //Test #8 - Render HTML for the login_patron GET path
+    //Test #8 - Render HTML for the login GET path
     it('should render html for the login GET path', function (done) {
 
         request(server)
@@ -126,6 +128,23 @@ describe('The express server', function () {
                 done();
             });
     });
+
+    //Test #9 - Ensure a Username and Password can be entered by the login POST path
+    it('should ensure a Username and Password can be entered by the login POST path', function (done) {
+
+        request(server)
+            .post('/login')
+            .send({
+                "username": testUsername,
+                "password": testPassword
+            })
+            .expect(200, function(err,res) {
+               
+                if (err) {return done (err);}
+    
+                done();
+            });
+    })
 
     after(function(done) {
         app.close(function() {
