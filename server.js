@@ -82,11 +82,11 @@ app.get('/register', function(req, res){
 	pool.query('SELECT * FROM crud_user', (err, crud_user_results) => {
 	    console.log(err, crud_user_results)
 													    
-	    res.render('register'
-	    )
+	    res.render('register')
+
 	    console.log('Content-Type: ' + res.get('Content-Type'))
 	})
-  res.render('register.pug', { title: 'Sign up here' });
+
 });
 
 app.get('/login_patron', function(req, res){
