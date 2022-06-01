@@ -307,7 +307,7 @@ ALTER TABLE ONLY public.crud_user
 --
 
 ALTER TABLE ONLY public.crud_reservations
-    ADD CONSTRAINT fk_library FOREIGN KEY (book_id) REFERENCES public.crud_library(id);
+    ADD CONSTRAINT fk_library FOREIGN KEY (book_id) REFERENCES public.crud_library(id) ON DELETE CASCADE;
 
 
 --
@@ -315,7 +315,7 @@ ALTER TABLE ONLY public.crud_reservations
 --
 
 ALTER TABLE ONLY public.crud_reservations
-    ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES public.crud_user(id);
+    ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES public.crud_user(id) ON DELETE CASCADE;
 
 
 --
