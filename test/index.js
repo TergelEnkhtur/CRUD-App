@@ -1,6 +1,7 @@
 const server = require('../server');
 const request = require('supertest');
 const expect = require('chai').expect;
+const { UserModel } = require('/database/schema.sql');
 
 describe('The express server', function () {
 
@@ -112,7 +113,19 @@ describe('The express server', function () {
             //});
     //})
 
+    //Test #8 - Render HTML for the login_patron GET path
+    it('should render html for the login GET path', function (done) {
+
+        request(server)
+            .get('/login')
+            .expect('Content-Type',/html/)
+            .expect(200, function(err,res) {
     
+                if (err) {return done (err);}
+    
+                done();
+            });
+    });
 
     after(function(done) {
         app.close(function() {

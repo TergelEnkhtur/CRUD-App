@@ -105,9 +105,11 @@ app.get('/login_patron', function(req, res){
 
 // Login Patron Page - POST
 app.post('/login_patron', function(req, res) {
+
 	//grabbing the input from the fields
 	let username = req.body.username;
 	let password = req.body.password;
+
 	console.log(req.body)
 
 	//moves foward if the fields are not empty
@@ -141,11 +143,12 @@ app.post('/login_patron', function(req, res) {
 }); 
 
 // Beginning commented lines of the authentication that uses the crud_user(userrole = admin) table
+// Login Page - GET
 app.get('/login', function(req, res){
 
     res.render('login.pug', { title: 'login  here' });
 	/*
-	if (!req.session.loggedin){
+	if (!req.session.loggedin){ 
 
 		// in case they are not logged in
 		res.send('Please login to view this page!');
@@ -191,12 +194,6 @@ app.post('/login', function(req, res) {
 	}
 }); 
 
-app.get('/thanks', function(req, res){
-
-    res.render('thanks.pug');
-	res.end();
-});
-
 app.get('/logged_in_homepage', function(req, res){
 
     res.render('logged_in_homepage.pug', { title: 'login  here' });
@@ -241,7 +238,7 @@ app.get('/rented_books', function(req, res){
 	})
 });
 */
-// Book Reservations Page - Read
+// Usertable Page - Read
 app.get('/rented_books', function(req, res){
 	var searchTerm2 = req.query.searchTerm2;
 	var searchParam2 = req.query.search_param2;
@@ -277,6 +274,21 @@ app.post('/rented_books/:id', (req, res) => {
 	console.log(userid)
 	
 	pool.query(`INSERT INTO crud_reservations (book_id, user_id) VALUES (${bookid}, ${userid})`, (err, result) => {
+	  console.log(err)
+	  
+	  res.redirect('/rented_books')
+	})
+})
+
+
+// Book Reservations Page - Delete
+app.delete('/rented_books/:id/delete', (req, res) => {
+
+	const id = req.params["id"]
+  
+	console.log(id)
+  
+	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
 	  console.log(err)
 	  
 	  res.redirect('/rented_books')
