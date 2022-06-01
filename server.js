@@ -283,44 +283,6 @@ app.post('/rented_books/:id', (req, res) => {
 	})
 })
 
-// // Book Reservations Page - Update
-// app.get('/rented_books/:id', (req, res) => {
-
-// 	const id = req.params["id"]
-
-// 	pool.query(`SELECT * FROM crud_library WHERE id = '${id}'`, (err, crud_reservations_results) => {
-// 	    console.log(err, crud_reservations_results)
-
-	    
-// 	    console.log('Content-Type: ' + res.get('Content-Type'))
-// 		res.render('user_form',{user:crud_reservations_results.rows[0]})
-// 	})
-// })
-
-// app.post('/rented_books/:id', (req, res) => {
-// 	console.log(req.body)
-// 	pool.query(`UPDATE crud_reservations SET fullname='${req.body.fullname}', username='${req.body.username}', password='${req.body.password}' WHERE id = '${req.params["id"]}'`, (err, results) => { 
-	
-// 	console.log(err, results)
-	
-// 	res.redirect('/rented_books')
-// 	})
-// })
-
-// // Book Reservations Page - Delete
-// app.delete('/rented_books/:id/delete', (req, res) => {
-
-// 	const id = req.params["id"]
-  
-// 	console.log(id)
-  
-// 	pool.query(`DELETE FROM crud_reservations WHERE id = ${id}`, (err, result) => {
-// 	  console.log(err)
-	  
-// 	  res.redirect('/rented_books')
-// 	})
-// })
-
 // crud_user
 // Usertable Page - Read
 app.get('/usertable', function(req, res){
