@@ -92,7 +92,7 @@ app.get('/register', function(req, res){
 // Login Patron Page - GET
 app.get('/login_patron', function(req, res){
 
-    res.render('login_patron.pug', { title: 'login  here' });
+    res.render('login_patron.pug', { title: 'Login Here' });
 	/*
 	if (!req.session.loggedin){
 
@@ -103,6 +103,7 @@ app.get('/login_patron', function(req, res){
 	res.end();
 });
 
+// Login Patron Page - POST
 app.post('/login_patron', function(req, res) {
 	//grabbing the input from the fields
 	let username = req.body.username;
