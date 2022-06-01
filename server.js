@@ -89,6 +89,12 @@ app.get('/register', function(req, res){
 
 });
 
+app.get('/thanks', function(req, res){
+
+    res.render('thanks.pug');
+	res.end();
+});
+
 // Login Patron Page - GET
 app.get('/login_patron', function(req, res){
 
