@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
     res.render('index.pug', { title: 'home page' });
 });
 
-// Register Page - Post
+// Register Page - POST
 app.post('/register', (req, res) => {
 
     pool.query(`INSERT INTO crud_user (fullname, username, password, repassword, userrole) VALUES ('${req.body.fullname}', '${req.body.username}', '${req.body.password}', '${req.body.repassword}', 'patron')`, (err, results) => {
@@ -75,7 +75,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-// Register Page - Create
+// Register Page - GET
 app.get('/register', function(req, res){
     //console.log('Accept: ' + req.get('Accept'))
     	
@@ -89,6 +89,7 @@ app.get('/register', function(req, res){
 
 });
 
+// Login Patron Page - GET
 app.get('/login_patron', function(req, res){
 
     res.render('login_patron.pug', { title: 'login  here' });
