@@ -1,7 +1,6 @@
 <!-- PROJECT -->
 <br />
 <p align="center">
-    </a>
     <h3 align="center">CSC-394-CRUD-App</h3>
     <p align="center">
         A Library Catalog Web App
@@ -37,15 +36,17 @@ Contributors/Group Members: Brandon Rosas, Henry Holman, Tergel Enkhtur, Zaeem K
 
 ### Built With
 
-* [JavaScript](https://www.javascript.com)
+* [Express](https://expressjs.com)
+* [PostgreSQL](https://www.postgresql.org)
+* [NodeJS](https://nodejs.org/en/)
 * [Pug](https://pugjs.org/api/getting-started.html)
 * [HTML](https://html.com)
-* [PLpgSQL](https://www.postgresql.org)
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+* [JavaScript](https://www.javascript.com)
 
 ### Deployed With
 
 * [Heroku](https://heroku.com)
-
 
 <!-- CONTACT -->
 ## Contact
