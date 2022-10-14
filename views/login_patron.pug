@@ -17,6 +17,7 @@ html(lang='en')
       .card.p-5
         form(action=`/login_patron`, _lpchecked='1', method='post')
           h1.h3.mb-3.fw-formal Please log in
+          h2.h3.mb-3.fw-formal (Or Try Username: "patron" Password: "patron")
           .form-floating
             input#floatingInput.form-control(type='username' placeholder='Username', name="username")
             label(for='floatingInput') Username
