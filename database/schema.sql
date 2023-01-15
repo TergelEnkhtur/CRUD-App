@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.2
--- Dumped by pg_dump version 14.2
+-- Dumped from database version 15.1
+-- Dumped by pg_dump version 15.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -34,7 +34,7 @@ CREATE TABLE public.crud_library (
 );
 
 
-ALTER TABLE public.crud_library OWNER TO api_user;
+ALTER TABLE public.crud_library OWNER TO api_user
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -49,7 +49,7 @@ CREATE SEQUENCE public.crud_library_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.crud_library_id_seq OWNER TO api_user;
+ALTER TABLE public.crud_library_id_seq OWNER TO api_user
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -71,7 +71,7 @@ CREATE TABLE public.crud_rented_books (
 );
 
 
-ALTER TABLE public.crud_rented_books OWNER TO api_user;
+ALTER TABLE public.crud_rented_books OWNER TO api_user
 
 --
 -- Name: crud_rented_books_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -86,7 +86,7 @@ CREATE SEQUENCE public.crud_rented_books_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.crud_rented_books_id_seq OWNER TO api_user;
+ALTER TABLE public.crud_rented_books_id_seq OWNER TO api_user
 
 --
 -- Name: crud_rented_books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -106,7 +106,7 @@ CREATE TABLE public.crud_reservations (
 );
 
 
-ALTER TABLE public.crud_reservations OWNER TO api_user;
+ALTER TABLE public.crud_reservations OWNER TO api_user
 
 --
 -- Name: crud_reservations_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -121,7 +121,7 @@ CREATE SEQUENCE public.crud_reservations_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.crud_reservations_id_seq OWNER TO api_user;
+ALTER TABLE public.crud_reservations_id_seq OWNER TO api_user
 
 --
 -- Name: crud_reservations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
@@ -144,7 +144,7 @@ CREATE TABLE public.crud_user (
 );
 
 
-ALTER TABLE public.crud_user OWNER TO api_user;
+ALTER TABLE public.crud_user OWNER TO api_user
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE; Schema: public; Owner: api_user
@@ -159,14 +159,13 @@ CREATE SEQUENCE public.crud_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.crud_user_id_seq OWNER TO api_user;
+ALTER TABLE public.crud_user_id_seq OWNER TO api_user
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: api_user
 --
 
 ALTER SEQUENCE public.crud_user_id_seq OWNED BY public.crud_user.id;
-
 
 
 --
@@ -197,14 +196,16 @@ ALTER TABLE ONLY public.crud_reservations ALTER COLUMN id SET DEFAULT nextval('p
 ALTER TABLE ONLY public.crud_user ALTER COLUMN id SET DEFAULT nextval('public.crud_user_id_seq'::regclass);
 
 
-
 --
 -- Data for Name: crud_library; Type: TABLE DATA; Schema: public; Owner: api_user
 --
 
 COPY public.crud_library (id, book_title, author_name, genre, isbn, books_available) FROM stdin;
-10	Grit: The Power of Passion and Perseverance	Angela Duckworth	Self-help book	978-1-501111-10-9	123
-20	Harry Potter	J. K. Rowling	Adventure	978-3-16-148410-3	43
+26	The Silmarillion	J. R. R Tolkien	Fantasy Epic	978-0-618135-04-2	5
+27	Diary Of A Wimpy Kid	Jeff Kinney	Fiction	978-1-419741-85-2	6
+28	Hyperion	Dan Simmons	Science Fiction	978-0-399178-61-0	5
+29	Leviathan Wakes	James S. A. Corey	Science Fiction	978-0-316129-08-4	6
+24	Grit: The Power of Passion and Perseverance	Angela Duckworth	Self-help book	978-3-16-148410-3	123
 \.
 
 
@@ -222,9 +223,6 @@ COPY public.crud_rented_books (id, book_title, author_name, genre, isbn) FROM st
 --
 
 COPY public.crud_reservations (id, book_id, user_id) FROM stdin;
-1	20	8
-2	20	8
-3	10	8
 \.
 
 
@@ -233,18 +231,16 @@ COPY public.crud_reservations (id, book_id, user_id) FROM stdin;
 --
 
 COPY public.crud_user (id, fullname, username, password, repassword, userrole) FROM stdin;
-8	Severus	Joker	Lily	Lily	patron
-25	Correct Password	CorrectPassword	123	123	patron
-26	Clark Kent	Superman	Lois	Lois	librarian
+31	librarian	librarian	librarian	librarian	librarian
+32	patron	patron	patron	patron	patron
 \.
-
 
 
 --
 -- Name: crud_library_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_library_id_seq', 23, true);
+SELECT pg_catalog.setval('public.crud_library_id_seq', 29, true);
 
 
 --
@@ -258,15 +254,14 @@ SELECT pg_catalog.setval('public.crud_rented_books_id_seq', 1, true);
 -- Name: crud_reservations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_reservations_id_seq', 3, true);
+SELECT pg_catalog.setval('public.crud_reservations_id_seq', 9, true);
 
 
 --
 -- Name: crud_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: api_user
 --
 
-SELECT pg_catalog.setval('public.crud_user_id_seq', 26, true);
-
+SELECT pg_catalog.setval('public.crud_user_id_seq', 30, true);
 
 
 --
@@ -301,21 +296,20 @@ ALTER TABLE ONLY public.crud_user
     ADD CONSTRAINT crud_user_pkey PRIMARY KEY (id);
 
 
-
---
--- Name: crud_reservations fk_library; Type: FK CONSTRAINT; Schema: public; Owner: api_user
---
-
-ALTER TABLE ONLY public.crud_reservations
-    ADD CONSTRAINT fk_library FOREIGN KEY (book_id) REFERENCES public.crud_library(id) ON DELETE CASCADE;
-
-
 --
 -- Name: crud_reservations fk_user; Type: FK CONSTRAINT; Schema: public; Owner: api_user
 --
 
 ALTER TABLE ONLY public.crud_reservations
     ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES public.crud_user(id) ON DELETE CASCADE;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: pg_database_owner
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
