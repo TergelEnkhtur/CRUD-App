@@ -45,6 +45,4 @@ Contributors/Group Members: Brandon Rosas, Henry Holman, Tergel Enkhtur, Zaeem K
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://tenkhtur-csc-394-crud-app.herokuapp.com](https://tenkhtur-csc-394-crud-app.herokuapp.com)
-
 Email: [tergel.e9@gmail.com](mailto:tergel.e9@gmail.com)
