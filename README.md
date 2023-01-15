@@ -15,7 +15,6 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#built-with">Deployed With</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -27,7 +26,7 @@
 
 ![2022-08-15 23 39 04](https://user-images.githubusercontent.com/78391043/184667550-a9830cce-ec4b-4eb0-be97-75a957a8412d.png)
 
-Simulated a library bookkeeping app that a librarian would use to Create, Read, Update, and Delete books to a PostgreSQL database which patrons could rent from. The app has a log-in page to distinguish librarians from patrons and is hosted on Heroku. 
+Simulated a library bookkeeping app that a librarian would use to Create, Read, Update, and Delete books to a PostgreSQL database which patrons could rent from. The app has a log-in page to distinguish librarians from patrons. 
 
 DePaul University, CSC 394 // IS 376, Team 4, CRUD Application Final Project
 
@@ -42,10 +41,6 @@ Contributors/Group Members: Brandon Rosas, Henry Holman, Tergel Enkhtur, Zaeem K
 * [HTML](https://html.com)
 * [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 * [JavaScript](https://www.javascript.com)
-
-### Deployed With
-
-* [Heroku](https://heroku.com)
 
 <!-- CONTACT -->
 ## Contact
